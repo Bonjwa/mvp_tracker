@@ -55,7 +55,11 @@ const BOSS_RESPAWN_CONFIG = {
   'phreeoni':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Morroc Field 15: 2h
 
   // Medium Difficulty
-  'atroce':             { minMs: 3 * 60 * 60 * 1000,   maxMs: 6 * 60 * 60 * 1000 },   // Rachel/Veins Fields: 3–6h
+  'atroce ra_fild02':   { minMs: 4 * 60 * 60 * 1000,   maxMs: 250 * 60 * 1000 },
+  'atroce ra_fild03':   { minMs: 3 * 60 * 60 * 1000,   maxMs: 190 * 60 * 1000 },
+  'atroce ra_fild04':   { minMs: 5 * 60 * 60 * 1000,   maxMs: 310 * 60 * 1000 },
+  'atroce ve_fild01':   { minMs: 3 * 60 * 60 * 1000,   maxMs: 190 * 60 * 1000 },
+  'atroce ve_fild02':   { minMs: 6 * 60 * 60 * 1000,   maxMs: 370 * 60 * 1000 },
   'lady tanee':         { minMs: 7 * 60 * 60 * 1000,   maxMs: 7 * 60 * 60 * 1000 },   // Ayothaya Dungeon 2: 7h
   'mistress':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Mt. Mjolnir 4: 2h
   'moonlight flower':   { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Payon Cave 5: 1h
@@ -119,7 +123,11 @@ const BOSS_LIST = [
   'Anubis',
   'Araccryo',
   'Assassin Cross Eremes',
-  'Atroce',
+  'Atroce ra_fild02',
+  'Atroce ra_fild03',
+  'Atroce ra_fild04',
+  'Atroce ve_fild01',
+  'Atroce ve_fild02',
   'Baihu',
   'Baphomet',
   'Beelzebub',
