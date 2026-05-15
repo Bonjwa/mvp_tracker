@@ -1,0 +1,21 @@
+{
+  "name": "boss-respawn-tracker",
+  "version": "1.0.0",
+  "description": "Discord bot for tracking RO boss respawns",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "boss",
+    "tracker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^17.2.3"
+  }
+}
