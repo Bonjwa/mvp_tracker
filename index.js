@@ -74,8 +74,8 @@ const BOSS_RESPAWN_CONFIG = {
   'maya': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },
   'maya purple': { minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },
   'gopinch': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
-  'ghostring treasure02': { minMs: 33 * 60 * 60 * 1000, maxMs: 53 * 60 * 1000 },
-  'ghostring pay_fild04': { minMs: 60 * 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
+  'ghostring treasure02': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
+  'ghostring pay_fild04': { minMs: 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
   // Mid-High Difficulty
   'doppelganger': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
   'egnigem cenia': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Somatology Lab 2: 2h
