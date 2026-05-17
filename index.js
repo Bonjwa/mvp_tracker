@@ -66,11 +66,13 @@ const BOSS_RESPAWN_CONFIG = {
   'osiris':             { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Pyramid 4F: 1h
   'drake':              { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Sunken Ship 2: 2h
   'pharaoh':            { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Sphinx 5: 1h
+  'hydrolancer':        { minMs: 50 * 60 * 1000,   maxMs: 90 * 60 * 1000 },
   'hatii':              { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Lutie Field: 2h
   'turtle general':     { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Turtle Island 4: 1h
   'maya':               { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Ant Hell 2: 2h
   'gopinch':            { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
-
+  'ghostring treasure02':{ minMs: 33 * 60 * 60 * 1000,   maxMs: 53 * 60 * 1000 },
+  'ghostring pay_fild04':{ minMs: 60 * 60 * 60 * 1000,   maxMs: 90 * 60 * 1000 },
   // Mid-High Difficulty
   'doppelganger':       { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
   'egnigem cenia':      { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Somatology Lab 2: 2h
@@ -92,17 +94,20 @@ const BOSS_RESPAWN_CONFIG = {
   'orc lord':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Geffen Field 10: 2h
   'rsx 0806':           { minMs: 125 * 60 * 1000,       maxMs: 125 * 60 * 1000 },       // Mine Dungeon 2: 125min
   'stormy knight':      { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Toy Factory 2: 1h
+  'valkyrie odin_tem02':  { minMs: 90 * 60 * 1000,   maxMs: 120 * 60 * 1000 },  
+  'valkyrie odin_tem03 #1':  { minMs: 30 * 60 * 1000,   maxMs: 50 * 60 * 1000 },
+  'valkyrie odin_tem03 #2':  { minMs: 30 * 60 * 1000,   maxMs: 50 * 60 * 1000 }, // Odin Shrine 3: 8h
   'valkyrie randgris':  { minMs: 8 * 60 * 60 * 1000,   maxMs: 8 * 60 * 60 * 1000 },   // Odin Shrine 3: 8h
   'wounded morocc':     { minMs: 12 * 60 * 60 * 1000,  maxMs: 12 * 60 * 60 * 1000 },  // Dimensional Gorge: 12h
   'beelzebub':          { minMs: 12 * 60 * 60 * 1000,  maxMs: 12 * 60 * 60 * 1000 },  // Cursed Monastery 3: 12h
 
   // Somatology Lab 3 (random pick, 95–150 min window)
-  'assassin cross eremes':    { minMs: 95 * 60 * 1000, maxMs: 150 * 60 * 1000 },
-  'high priest margaretha':   { minMs: 95 * 60 * 1000, maxMs: 150 * 60 * 1000 },
-  'high wizard kathryne':     { minMs: 95 * 60 * 1000, maxMs: 150 * 60 * 1000 },
-  'lord knight seyren':       { minMs: 95 * 60 * 1000, maxMs: 150 * 60 * 1000 },
-  'master smith howard':      { minMs: 95 * 60 * 1000, maxMs: 150 * 60 * 1000 },
-  'sniper cecil':             { minMs: 95 * 60 * 1000, maxMs: 150 * 60 * 1000 },
+  'assassin cross eremes':    { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'high priest margaretha':   { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'high wizard kathryne':     { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'lord knight seyren':       { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'master smith howard':      { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'sniper cecil':             { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
 
   // Special condition spawns (fixed timers where known)
   'ktullanux':          { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Ice Dungeon 3: 2h after defeat
@@ -128,13 +133,13 @@ const BOSS_LIST = [
   'Atroce ra_fild04',
   'Atroce ve_fild01',
   'Atroce ve_fild02',
-  'Baihu',
+  // 'Baihu',
   'Baphomet',
   'Beelzebub',
-  'Brain Sucker',
-  'Byrogue',
-  'Chepet',
-  'Chimera',
+  // 'Brain Sucker',
+  // 'Byrogue',
+  // 'Chepet',
+  // 'Chimera',
   'Dark Lord',
   'Detardeurus',
   'Deviling',
@@ -149,7 +154,8 @@ const BOSS_LIST = [
   'Evil Snake Lord',
   'Fallen Bishop',
   'Femmire',
-  'Ghostring',
+  'Ghostring treasure02',
+  'Ghostring pay_fild04',
   'Gloom Under Night',
   'Goblin Leader',
   'Golden Thief Bug',
@@ -196,13 +202,16 @@ const BOSS_LIST = [
   'Toad',
   'Turtle General',
   'Vagabond Wolf',
+  'Valkyrie odin_tem02',
+  'Valkyrie odin_tem03 #1',
+  'Valkyrie odin_tem03 #2',
   'Valkyrie Randgris',
   'Vesper',
-  'Vocal',
-  'Vodyanoy',
+  // 'Vocal',
+  // 'Vodyanoy',
   'White Lady',
   'Wounded Morocc',
-  'Zealotus',
+  // 'Zealotus',
 ].sort();
 
 const NOTIFICATION_ROLE_NAME = 'Roweener';
