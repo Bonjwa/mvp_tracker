@@ -47,75 +47,75 @@ const DEFAULT_RESPAWN_MS = 1 * 60 * 60 * 1000; // 1 hour (most common MVP respaw
 
 const BOSS_RESPAWN_CONFIG = {
   // Low Difficulty
-  'eddga':              { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Payon Field 10: 2h
-  'tao gunka':          { minMs: 5 * 60 * 60 * 1000,   maxMs: 5 * 60 * 60 * 1000 },   // Beach Dungeon: 5h
-  'amon ra':            { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Pyramid B2F: 1h
-  'dracula':            { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Geffen Dungeon 2: 1h
-  'golden thief bug':   { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Prontera Culvert 4: 1h
-  'phreeoni':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Morroc Field 15: 2h
-  'arc angeling':       { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },
-  'angeling':           { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },
+  'eddga': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Payon Field 10: 2h
+  'tao gunka': { minMs: 5 * 60 * 60 * 1000, maxMs: 5 * 60 * 60 * 1000 },   // Beach Dungeon: 5h
+  'amon ra': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Pyramid B2F: 1h
+  'dracula': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Geffen Dungeon 2: 1h
+  'golden thief bug': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Prontera Culvert 4: 1h
+  'phreeoni': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Morroc Field 15: 2h
+  'arc angeling': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },
+  'angeling': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },
 
   // Medium Difficulty
-  'atroce ra_fild02':   { minMs: 4 * 60 * 60 * 1000,   maxMs: 250 * 60 * 1000 },
-  'atroce ra_fild03':   { minMs: 3 * 60 * 60 * 1000,   maxMs: 190 * 60 * 1000 },
-  'atroce ra_fild04':   { minMs: 5 * 60 * 60 * 1000,   maxMs: 310 * 60 * 1000 },
-  'atroce ve_fild01':   { minMs: 3 * 60 * 60 * 1000,   maxMs: 190 * 60 * 1000 },
-  'atroce ve_fild02':   { minMs: 6 * 60 * 60 * 1000,   maxMs: 370 * 60 * 1000 },
-  'lady tanee':         { minMs: 7 * 60 * 60 * 1000,   maxMs: 7 * 60 * 60 * 1000 },   // Ayothaya Dungeon 2: 7h
-  'mistress':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Mt. Mjolnir 4: 2h
-  'moonlight flower':   { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Payon Cave 5: 1h
-  'osiris':             { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Pyramid 4F: 1h
-  'drake':              { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Sunken Ship 2: 2h
-  'pharaoh':            { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Sphinx 5: 1h
-  'hydrolancer':        { minMs: 50 * 60 * 1000,   maxMs: 90 * 60 * 1000 },
-  'hatii':              { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Lutie Field: 2h
-  'turtle general':     { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Turtle Island 4: 1h
-  'maya':               { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },
-  'maya purple':        { minMs: 2 * 60 * 60 * 1000,   maxMs: 3 * 60 * 60 * 1000 },
-  'gopinch':            { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
-  'ghostring treasure02':{ minMs: 33 * 60 * 60 * 1000,   maxMs: 53 * 60 * 1000 },
-  'ghostring pay_fild04':{ minMs: 60 * 60 * 60 * 1000,   maxMs: 90 * 60 * 1000 },
+  'atroce ra_fild02': { minMs: 4 * 60 * 60 * 1000, maxMs: 250 * 60 * 1000 },
+  'atroce ra_fild03': { minMs: 3 * 60 * 60 * 1000, maxMs: 190 * 60 * 1000 },
+  'atroce ra_fild04': { minMs: 5 * 60 * 60 * 1000, maxMs: 310 * 60 * 1000 },
+  'atroce ve_fild01': { minMs: 3 * 60 * 60 * 1000, maxMs: 190 * 60 * 1000 },
+  'atroce ve_fild02': { minMs: 6 * 60 * 60 * 1000, maxMs: 370 * 60 * 1000 },
+  'lady tanee': { minMs: 7 * 60 * 60 * 1000, maxMs: 7 * 60 * 60 * 1000 },   // Ayothaya Dungeon 2: 7h
+  'mistress': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Mt. Mjolnir 4: 2h
+  'moonlight flower': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Payon Cave 5: 1h
+  'osiris': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Pyramid 4F: 1h
+  'drake': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Sunken Ship 2: 2h
+  'pharaoh': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Sphinx 5: 1h
+  'hydrolancer': { minMs: 50 * 60 * 1000, maxMs: 90 * 60 * 1000 },
+  'hatii': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Lutie Field: 2h
+  'turtle general': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Turtle Island 4: 1h
+  'maya': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },
+  'maya purple': { minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },
+  'gopinch': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
+  'ghostring treasure02': { minMs: 33 * 60 * 60 * 1000, maxMs: 53 * 60 * 1000 },
+  'ghostring pay_fild04': { minMs: 60 * 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
   // Mid-High Difficulty
-  'doppelganger':       { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
-  'egnigem cenia':      { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Somatology Lab 2: 2h
-  'kiel-d-01':          { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Kiel Dungeon 2: 2h
-  'orc hero':           { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Geffen Field 12: 1h
-  'evil snake lord':    { minMs: 94 * 60 * 1000,        maxMs: 94 * 60 * 1000 },        // Kunlun Dungeon 3: 94min
-  'samurai specter':    { minMs: 91 * 60 * 1000,        maxMs: 91 * 60 * 1000 },        // Amatsu Dungeon 3: 91min
-  'vesper':             { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Juperos Core: 2h
-  'gloom under night':  { minMs: 5 * 60 * 60 * 1000,   maxMs: 5 * 60 * 60 * 1000 },   // Rachel Sanctuary 5: 5h
-  'white lady':         { minMs: 117 * 60 * 1000,       maxMs: 117 * 60 * 1000 },       // Louyang Dungeon 3: 117min
-  'fallen bishop':      { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Cursed Monastery 2: 2h
+  'doppelganger': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
+  'egnigem cenia': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Somatology Lab 2: 2h
+  'kiel-d-01': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Kiel Dungeon 2: 2h
+  'orc hero': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Geffen Field 12: 1h
+  'evil snake lord': { minMs: 94 * 60 * 1000, maxMs: 94 * 60 * 1000 },        // Kunlun Dungeon 3: 94min
+  'samurai specter': { minMs: 91 * 60 * 1000, maxMs: 91 * 60 * 1000 },        // Amatsu Dungeon 3: 91min
+  'vesper': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Juperos Core: 2h
+  'gloom under night': { minMs: 5 * 60 * 60 * 1000, maxMs: 5 * 60 * 60 * 1000 },   // Rachel Sanctuary 5: 5h
+  'white lady': { minMs: 117 * 60 * 1000, maxMs: 117 * 60 * 1000 },       // Louyang Dungeon 3: 117min
+  'fallen bishop': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Cursed Monastery 2: 2h
 
   // High Difficulty
-  'baphomet':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Labyrinth Forest 3: 2h
-  'dark lord':          { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Glast Heim Churchyard: 1h
-  'detardeurus':        { minMs: 3 * 60 * 60 * 1000,   maxMs: 3 * 60 * 60 * 1000 },   // Abyss Lake 3: 3h
-  'ifrit':              { minMs: 11 * 60 * 60 * 1000,  maxMs: 11 * 60 * 60 * 1000 },  // Thor's Volcano 3: 11h
-  'lord of the dead':   { minMs: 133 * 60 * 1000,       maxMs: 133 * 60 * 1000 },       // Niflheim: 133min
-  'orc lord':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Geffen Field 10: 2h
-  'rsx 0806':           { minMs: 125 * 60 * 1000,       maxMs: 125 * 60 * 1000 },       // Mine Dungeon 2: 125min
-  'stormy knight':      { minMs: 1 * 60 * 60 * 1000,   maxMs: 1 * 60 * 60 * 1000 },   // Toy Factory 2: 1h
-  'valkyrie odin_tem02':  { minMs: 90 * 60 * 1000,   maxMs: 120 * 60 * 1000 },  
-  'valkyrie odin_tem03 #1':  { minMs: 30 * 60 * 1000,   maxMs: 50 * 60 * 1000 },
-  'valkyrie odin_tem03 #2':  { minMs: 30 * 60 * 1000,   maxMs: 50 * 60 * 1000 }, // Odin Shrine 3: 8h
-  'valkyrie randgris':  { minMs: 8 * 60 * 60 * 1000,   maxMs: 8 * 60 * 60 * 1000 },   // Odin Shrine 3: 8h
-  'wounded morocc':     { minMs: 12 * 60 * 60 * 1000,  maxMs: 12 * 60 * 60 * 1000 },  // Dimensional Gorge: 12h
-  'beelzebub':          { minMs: 12 * 60 * 60 * 1000,  maxMs: 12 * 60 * 60 * 1000 },  // Cursed Monastery 3: 12h
+  'baphomet': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Labyrinth Forest 3: 2h
+  'dark lord': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Glast Heim Churchyard: 1h
+  'detardeurus': { minMs: 3 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },   // Abyss Lake 3: 3h
+  'ifrit': { minMs: 11 * 60 * 60 * 1000, maxMs: 11 * 60 * 60 * 1000 },  // Thor's Volcano 3: 11h
+  'lord of the dead': { minMs: 133 * 60 * 1000, maxMs: 133 * 60 * 1000 },       // Niflheim: 133min
+  'orc lord': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Field 10: 2h
+  'rsx 0806': { minMs: 125 * 60 * 1000, maxMs: 125 * 60 * 1000 },       // Mine Dungeon 2: 125min
+  'stormy knight': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Toy Factory 2: 1h
+  'valkyrie odin_tem02': { minMs: 90 * 60 * 1000, maxMs: 120 * 60 * 1000 },
+  'valkyrie odin_tem03 #1': { minMs: 30 * 60 * 1000, maxMs: 50 * 60 * 1000 },
+  'valkyrie odin_tem03 #2': { minMs: 30 * 60 * 1000, maxMs: 50 * 60 * 1000 }, // Odin Shrine 3: 8h
+  'valkyrie randgris': { minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 60 * 1000 },   // Odin Shrine 3: 8h
+  'wounded morocc': { minMs: 12 * 60 * 60 * 1000, maxMs: 12 * 60 * 60 * 1000 },  // Dimensional Gorge: 12h
+  'beelzebub': { minMs: 12 * 60 * 60 * 1000, maxMs: 12 * 60 * 60 * 1000 },  // Cursed Monastery 3: 12h
 
   // Somatology Lab 3 (random pick, 95–150 min window)
-  'assassin cross eremes':    { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
-  'high priest margaretha':   { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
-  'high wizard kathryne':     { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
-  'lord knight seyren':       { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
-  'master smith howard':      { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
-  'sniper cecil':             { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'assassin cross eremes': { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'high priest margaretha': { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'high wizard kathryne': { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'lord knight seyren': { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'master smith howard': { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
+  'sniper cecil': { minMs: 100 * 60 * 1000, maxMs: 130 * 60 * 1000 },
 
   // Special condition spawns (fixed timers where known)
-  'ktullanux':          { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Ice Dungeon 3: 2h after defeat
-  'garm':               { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },   // Retained from original
-  'thanatos':           { minMs: 2 * 60 * 60 * 1000,   maxMs: 2 * 60 * 60 * 1000 },
+  'ktullanux': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Ice Dungeon 3: 2h after defeat
+  'garm': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Retained from original
+  'thanatos': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },
 };
 
 function getBossRespawnTimes(bossName) {
@@ -259,7 +259,7 @@ function createRaidKey(guildId, messageId) {
 
 async function getOrCreateNotificationRole(guild) {
   let role = guild.roles.cache.find(r => r.name === NOTIFICATION_ROLE_NAME);
-  
+
   if (!role) {
     try {
       role = await guild.roles.create({
@@ -274,7 +274,7 @@ async function getOrCreateNotificationRole(guild) {
       return null;
     }
   }
-  
+
   return role;
 }
 
@@ -309,7 +309,7 @@ function loadBossesFromDatabase() {
   try {
     const data = readData();
     const bosses = [];
-    
+
     for (const key in data) {
       const bossData = data[key];
       const hasRespawnData = bossData && (bossData.respawnTime || bossData.respawnTimeMin);
@@ -317,7 +317,7 @@ function loadBossesFromDatabase() {
         bosses.push({ key, data: bossData });
       }
     }
-    
+
     return bosses;
   } catch (error) {
     console.error('Error loading from database:', error);
@@ -349,7 +349,7 @@ function loadRaidSignups() {
   try {
     const data = readData();
     const signups = [];
-    
+
     for (const key in data) {
       if (key.startsWith('raid:')) {
         const signupData = data[key];
@@ -358,7 +358,7 @@ function loadRaidSignups() {
         }
       }
     }
-    
+
     return signups;
   } catch (error) {
     console.error('Error loading raid signups:', error);
@@ -491,14 +491,14 @@ function parseUTCTime(timeStr) {
     }
   }
   if (!match) return null;
-  
+
   const hours = parseInt(match[1]);
   const minutes = parseInt(match[2]);
-  
+
   if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
     return null;
   }
-  
+
   const now = new Date();
   const deathTime = new Date(Date.UTC(
     now.getUTCFullYear(),
@@ -509,22 +509,22 @@ function parseUTCTime(timeStr) {
     0,
     0
   ));
-  
+
   if (deathTime > now) {
     deathTime.setUTCDate(deathTime.getUTCDate() - 1);
   }
-  
+
   return deathTime;
 }
 
 function formatTimeRemaining(ms) {
   if (ms <= 0) return 'Respawned!';
-  
+
   const totalSeconds = Math.floor(ms / 1000);
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
-  
+
   if (hours > 0) {
     return `${hours}h ${minutes}m ${seconds}s`;
   } else if (minutes > 0) {
@@ -544,7 +544,7 @@ function createStatusEmbed(guildId) {
   const embed = new EmbedBuilder()
     .setTitle('\u{1F550} Boss Respawn Tracker')
     .setColor(0x00AE86);
-  
+
   const now = Date.now();
   const entries = Array.from(bossTimers.entries())
     .filter(([key, timer]) => key.startsWith(`${guildId}:`))
@@ -567,32 +567,32 @@ function createStatusEmbed(guildId) {
       };
     })
     .sort((a, b) => b.timeRemainingMin - a.timeRemainingMin);
-  
+
   if (entries.length === 0) {
     embed.setDescription('No bosses are currently being tracked in this server.');
     return embed;
   }
-  
+
   const bossColumn = entries.map(entry => {
     return entry.emoji ? `${entry.emoji} ${entry.name}` : entry.name;
   }).join('\n');
-  
+
   const diedAtColumn = entries.map(entry => {
     return `${entry.deathTimeUTC} UTC`;
   }).join('\n');
-  
+
   const respawnColumn = entries.map(entry => {
-    return entry.hasRange 
+    return entry.hasRange
       ? `<t:${entry.respawnTimestampMin}:R> to <t:${entry.respawnTimestampMax}:R>`
       : `<t:${entry.respawnTimestampMin}:R>`;
   }).join('\n');
-  
+
   embed.addFields(
     { name: 'Boss', value: bossColumn, inline: true },
     { name: 'Died At', value: diedAtColumn, inline: true },
     { name: 'Respawns', value: respawnColumn, inline: true }
   );
-  
+
   return embed;
 }
 
@@ -652,21 +652,21 @@ async function updateBigBossDashboard(guildId) {
 
 async function scheduleBossRespawn(guildId, bossName, deathTime, respawnTimeMin, respawnTimeMax, channelId, skipDatabaseSave = false) {
   const timerKey = createTimerKey(guildId, bossName);
-  
+
   if (bossTimers.has(timerKey)) {
     const existing = bossTimers.get(timerKey);
     if (existing.reminderTimeout) clearTimeout(existing.reminderTimeout);
     if (existing.cleanupTimeout) clearTimeout(existing.cleanupTimeout);
     if (existing.timeout) clearTimeout(existing.timeout);
   }
-  
+
   const timeUntilRespawnMin = respawnTimeMin - Date.now();
   const timeUntilRespawnMax = respawnTimeMax - Date.now();
   const reminderDelay = Math.max(0, timeUntilRespawnMin - 60000);
-  
+
   const hasRange = respawnTimeMin !== respawnTimeMax;
   const bossEmoji = BIGBOSS_EMOJIS[bossName] || '';
-  
+
   const reminderTimeoutId = setTimeout(async () => {
     const homeChannelId = getHomeChannel(guildId);
     const targetChannelId = homeChannelId || channelId;
@@ -674,18 +674,18 @@ async function scheduleBossRespawn(guildId, bossName, deathTime, respawnTimeMin,
     if (channel) {
       const respawnTimestampMin = Math.floor(respawnTimeMin / 1000);
       const respawnTimestampMax = Math.floor(respawnTimeMax / 1000);
-      
+
       let respawnText;
       if (hasRange) {
         respawnText = `${bossEmoji} **${bossName}** respawns <t:${respawnTimestampMin}:R> to <t:${respawnTimestampMax}:R>!`;
       } else {
         respawnText = `${bossEmoji} **${bossName}** respawns <t:${respawnTimestampMin}:R>!`;
       }
-      
+
       const embed = new EmbedBuilder()
         .setDescription(respawnText)
         .setColor(0xFF6B6B);
-      
+
       const killButton = new ActionRowBuilder()
         .addComponents(
           new ButtonBuilder()
@@ -693,24 +693,24 @@ async function scheduleBossRespawn(guildId, bossName, deathTime, respawnTimeMin,
             .setLabel('Kill')
             .setStyle(ButtonStyle.Danger)
         );
-      
+
       const guild = channel.guild;
       const role = await getOrCreateNotificationRole(guild);
       const mention = role ? `${role}` : '';
-      
-      await channel.send({ 
+
+      await channel.send({
         content: mention,
         embeds: [embed],
         components: [killButton]
       });
     }
-    
+
     if (!hasRange) {
       bossTimers.delete(timerKey);
       await removeBossFromDatabase(timerKey);
     }
   }, reminderDelay);
-  
+
   let cleanupTimeoutId = null;
   if (hasRange) {
     cleanupTimeoutId = setTimeout(async () => {
@@ -718,7 +718,7 @@ async function scheduleBossRespawn(guildId, bossName, deathTime, respawnTimeMin,
       await removeBossFromDatabase(timerKey);
     }, Math.max(0, timeUntilRespawnMax));
   }
-  
+
   const bossData = {
     bossName,
     deathTime,
@@ -729,9 +729,9 @@ async function scheduleBossRespawn(guildId, bossName, deathTime, respawnTimeMin,
     channelId,
     guildId
   };
-  
+
   bossTimers.set(timerKey, bossData);
-  
+
   if (!skipDatabaseSave) {
     await saveBossToDatabase(timerKey, bossData);
     if (BIG_BOSS_NAMES.has(bossName.toLowerCase())) {
@@ -746,11 +746,11 @@ async function restoreBossesFromDatabase() {
   const now = Date.now();
   let restoredCount = 0;
   let expiredCount = 0;
-  
+
   for (const { key, data } of bosses) {
     const respawnMin = data.respawnTimeMin || data.respawnTime;
     const respawnMax = data.respawnTimeMax || data.respawnTime;
-    
+
     if (respawnMax > now) {
       await scheduleBossRespawn(
         data.guildId,
@@ -767,7 +767,7 @@ async function restoreBossesFromDatabase() {
       expiredCount++;
     }
   }
-  
+
   console.log(`Restored ${restoredCount} boss timers, removed ${expiredCount} expired timers`);
 
   const guildIds = new Set(bosses.map(({ data }) => data.guildId).filter(Boolean));
@@ -781,17 +781,17 @@ async function restoreRaidSignups() {
   const signups = await loadRaidSignups();
   let restoredCount = 0;
   let updatedCount = 0;
-  
+
   for (const { key, data } of signups) {
     const raidKey = key.replace('raid:', '');
     raidSignups.set(raidKey, data);
     restoredCount++;
-    
+
     const parts = raidKey.split('_');
     if (parts.length === 2) {
       const guildId = parts[0];
       const messageId = parts[1];
-      
+
       try {
         const guild = await client.guilds.fetch(guildId);
         const channel = await guild.channels.fetch(data.channelId);
@@ -807,16 +807,16 @@ async function restoreRaidSignups() {
       }
     }
   }
-  
+
   console.log(`Restored ${restoredCount} raid signups, updated ${updatedCount} Discord messages`);
 }
 
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  
+
   await restoreBossesFromDatabase();
   await restoreRaidSignups();
-  
+
   const commands = [
     new SlashCommandBuilder()
       .setName('tomb')
@@ -830,7 +830,7 @@ client.on('ready', async () => {
         option.setName('time')
           .setDescription('Death time in UTC (HH:MM format, e.g., 14:30)')
           .setRequired(true)),
-    
+
     new SlashCommandBuilder()
       .setName('kill')
       .setDescription('Log a boss death right now')
@@ -839,19 +839,19 @@ client.on('ready', async () => {
           .setDescription('Name of the boss')
           .setRequired(true)
           .setAutocomplete(true)),
-    
+
     new SlashCommandBuilder()
       .setName('timers')
       .setDescription('Show all active boss timers'),
-    
+
     new SlashCommandBuilder()
       .setName('untimed')
       .setDescription('Show bosses that are not currently being tracked'),
-    
+
     new SlashCommandBuilder()
       .setName('notify')
       .setDescription('Toggle boss respawn notifications on/off'),
-    
+
     new SlashCommandBuilder()
       .setName('raid')
       .setDescription('Create a raid signup sheet')
@@ -859,7 +859,7 @@ client.on('ready', async () => {
         option.setName('name')
           .setDescription('Name of the raid')
           .setRequired(true)),
-    
+
     new SlashCommandBuilder()
       .setName('remove')
       .setDescription('Remove a boss from tracking (useful for fixing input errors)')
@@ -868,7 +868,7 @@ client.on('ready', async () => {
           .setDescription('Name of the boss to remove')
           .setRequired(true)
           .setAutocomplete(true)),
-    
+
     new SlashCommandBuilder()
       .setName('restore')
       .setDescription('Bulk restore boss timers by pasting a /timers list'),
@@ -895,12 +895,12 @@ client.on('ready', async () => {
       .setName('bigbosschannel')
       .setDescription('Set this channel as the big boss timer dashboard')
   ];
-  
+
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
-  
+
   try {
     console.log('Registering slash commands...');
-    
+
     for (const guild of client.guilds.cache.values()) {
       await rest.put(
         Routes.applicationGuildCommands(client.user.id, guild.id),
@@ -908,7 +908,7 @@ client.on('ready', async () => {
       );
       console.log(`Commands registered for guild: ${guild.name}`);
     }
-    
+
     console.log('Successfully registered all commands!');
   } catch (error) {
     console.error('Error registering commands:', error);
@@ -919,7 +919,7 @@ client.on('interactionCreate', async interaction => {
   if (interaction.isAutocomplete()) {
     const { commandName, options } = interaction;
     const focusedOption = options.getFocused(true);
-    
+
     const focusedValue = focusedOption.value.toLowerCase();
     let choices = [];
 
@@ -944,13 +944,13 @@ client.on('interactionCreate', async interaction => {
     );
     return;
   }
-  
+
   if (interaction.isButton()) {
     if (interaction.customId.startsWith('raid_')) {
       const action = interaction.customId.replace('raid_', '');
       const raidKey = createRaidKey(interaction.guildId, interaction.message.id);
       const signupData = raidSignups.get(raidKey);
-      
+
       if (!signupData) {
         await interaction.reply({
           content: '\u274C This raid signup is no longer active.',
@@ -958,7 +958,7 @@ client.on('interactionCreate', async interaction => {
         });
         return;
       }
-      
+
       if (action === 'Ping') {
         const allPlayers = new Set();
         const mentions = [];
@@ -971,7 +971,7 @@ client.on('interactionCreate', async interaction => {
             }
           });
         });
-        
+
         if (mentions.length === 0) {
           await interaction.reply({
             content: '\u274C No players signed up to ping.',
@@ -979,64 +979,64 @@ client.on('interactionCreate', async interaction => {
           });
           return;
         }
-        
+
         await interaction.channel.send({
           content: `\u{1F4E3} **${interaction.member.displayName}** pinged: ${mentions.join(' ')}`
         });
-        
+
         await interaction.reply({
           content: '\u2705 Pinged all signed up players.',
           ephemeral: true
         });
-        
+
       } else if (action === 'Bump') {
         const oldMessage = interaction.message;
         const embed = createRaidEmbed(signupData.name, signupData.roles, interaction.guildId);
         const buttons = createRaidButtons();
-        
+
         const newMessage = await interaction.channel.send({
           embeds: [embed],
           components: buttons
         });
-        
+
         const oldStorageKey = `raid:${raidKey}`;
         removeRaidSignup(oldStorageKey);
         raidSignups.delete(raidKey);
-        
+
         const newRaidKey = createRaidKey(interaction.guildId, newMessage.id);
         signupData.messageId = newMessage.id;
         raidSignups.set(newRaidKey, signupData);
         saveRaidSignup(`raid:${newRaidKey}`, signupData);
-        
+
         try {
           await oldMessage.delete();
         } catch (error) {
           console.log('Failed to delete old raid message:', error.message);
         }
-        
+
         await interaction.reply({
           content: '\u2705 Raid signup bumped.',
           ephemeral: true
         });
-        
+
       } else if (action === 'SecondaryRoles') {
         const userId = interaction.user.id;
         const currentSecondary = loadSecondaryRoles(interaction.guildId, userId);
-        
+
         const embed = new EmbedBuilder()
           .setTitle('Your Secondary Roles')
           .setDescription('Select roles you can also play. These will show as emojis next to your name on the signup sheet.')
           .setColor(0x00AE86);
-        
-        const currentDisplay = currentSecondary.length > 0 
+
+        const currentDisplay = currentSecondary.length > 0
           ? currentSecondary.map(r => `${RAID_ROLE_EMOJIS[r] || ''} ${r}`).join(', ')
           : 'None';
         embed.addFields({ name: 'Currently selected', value: currentDisplay });
-        
+
         const row1 = new ActionRowBuilder();
         const row2 = new ActionRowBuilder();
         const msgId = interaction.message.id;
-        
+
         RAID_ROLES.forEach((role, index) => {
           const isSelected = currentSecondary.includes(role);
           const button = new ButtonBuilder()
@@ -1049,20 +1049,20 @@ client.on('interactionCreate', async interaction => {
             row2.addComponents(button);
           }
         });
-        
+
         await interaction.reply({
           embeds: [embed],
           components: [row1, row2],
           ephemeral: true
         });
-        
+
       } else if (RAID_ROLES.includes(action)) {
         const userId = interaction.user.id;
         const userName = interaction.member.displayName;
-        
+
         const currentPlayers = signupData.roles[action] || [];
         const existingIndex = currentPlayers.findIndex(p => p.id === userId);
-        
+
         if (existingIndex !== -1) {
           currentPlayers.splice(existingIndex, 1);
           signupData.roles[action] = currentPlayers;
@@ -1075,7 +1075,7 @@ client.on('interactionCreate', async interaction => {
         }
         raidSignups.set(raidKey, signupData);
         saveRaidSignup(`raid:${raidKey}`, signupData);
-        
+
         const embed = createRaidEmbed(signupData.name, signupData.roles, interaction.guildId);
         await interaction.update({ embeds: [embed] });
       }
@@ -1085,30 +1085,30 @@ client.on('interactionCreate', async interaction => {
       const role = parts.slice(2).join('_');
       const userId = interaction.user.id;
       const guildId = interaction.guildId;
-      
+
       let currentSecondary = loadSecondaryRoles(guildId, userId);
-      
+
       if (currentSecondary.includes(role)) {
         currentSecondary = currentSecondary.filter(r => r !== role);
       } else {
         currentSecondary.push(role);
       }
-      
+
       saveSecondaryRoles(guildId, userId, currentSecondary);
-      
+
       const embed = new EmbedBuilder()
         .setTitle('Your Secondary Roles')
         .setDescription('Select roles you can also play. These will show as emojis next to your name on the signup sheet.')
         .setColor(0x00AE86);
-      
-      const currentDisplay = currentSecondary.length > 0 
+
+      const currentDisplay = currentSecondary.length > 0
         ? currentSecondary.map(r => `${RAID_ROLE_EMOJIS[r] || ''} ${r}`).join(', ')
         : 'None';
       embed.addFields({ name: 'Currently selected', value: currentDisplay });
-      
+
       const row1 = new ActionRowBuilder();
       const row2 = new ActionRowBuilder();
-      
+
       RAID_ROLES.forEach((roleItem, index) => {
         const isSelected = currentSecondary.includes(roleItem);
         const button = new ButtonBuilder()
@@ -1121,22 +1121,22 @@ client.on('interactionCreate', async interaction => {
           row2.addComponents(button);
         }
       });
-      
+
       await interaction.update({
         embeds: [embed],
         components: [row1, row2]
       });
-      
+
       for (const [raidKey, signupData] of raidSignups.entries()) {
         if (!raidKey.startsWith(guildId)) continue;
-        
+
         let userInSignup = false;
         RAID_ROLES.forEach(r => {
           if ((signupData.roles[r] || []).some(p => p.id === userId)) {
             userInSignup = true;
           }
         });
-        
+
         if (userInSignup) {
           try {
             const channel = await client.channels.fetch(signupData.channelId);
@@ -1154,28 +1154,28 @@ client.on('interactionCreate', async interaction => {
       const respawnConfig = getBossRespawnTimes(bossName);
       const respawnTimeMin = new Date(deathTime.getTime() + respawnConfig.minMs);
       const respawnTimeMax = new Date(deathTime.getTime() + respawnConfig.maxMs);
-      
+
       await scheduleBossRespawn(interaction.guildId, bossName, deathTime.getTime(), respawnTimeMin.getTime(), respawnTimeMax.getTime(), interaction.channelId);
-      
+
       const embed = createStatusEmbed(interaction.guildId);
       await interaction.reply({ embeds: [embed] });
     }
     return;
   }
-  
+
   if (interaction.isModalSubmit()) {
     if (interaction.customId === 'restore_timers_modal') {
       const timerListText = interaction.fields.getTextInputValue('timer_list_input');
       const lines = timerListText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-      
+
       const bossNames = [];
       const times = [];
-      
+
       const columnHeaders = ['boss', 'died at', 'respawns', 'respawn'];
       const bossRegex = /^(?:[\p{Emoji}\uFE0F\u200D]+\s*)?(?:\*\*)?([A-Za-z\s\-']+?)(?:\*\*)?$/u;
       const timeRegex = /^(\d{2}:\d{2})\s*UTC$/;
       const oldFormatRegex = /^(?:[\p{Emoji}\uFE0F\u200D]+\s*)?(?:\*\*)?(.+?)(?:\*\*)? died at (\d{2}:\d{2}) UTC/u;
-      
+
       for (const line of lines) {
         const oldMatch = line.match(oldFormatRegex);
         if (oldMatch) {
@@ -1183,7 +1183,7 @@ client.on('interactionCreate', async interaction => {
           times.push(oldMatch[2]);
           continue;
         }
-        
+
         const bossMatch = line.match(bossRegex);
         if (bossMatch) {
           const name = bossMatch[1].trim();
@@ -1193,47 +1193,55 @@ client.on('interactionCreate', async interaction => {
           }
           continue;
         }
-        
+
         const timeMatch = line.match(timeRegex);
         if (timeMatch) {
           times.push(timeMatch[1]);
           continue;
         }
       }
-      
+
       const successes = [];
       const errors = [];
-      
+
       const pairCount = Math.min(bossNames.length, times.length);
-      
+
       for (let i = 0; i < pairCount; i++) {
         const rawBossName = bossNames[i];
         const bossName = normalizeBossName(rawBossName);
+
+        if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
+          await interaction.reply({
+            content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
+            ephemeral: true
+          });
+          return;
+        }
         const timeStr = times[i];
-        
+
         const deathTime = parseUTCTime(timeStr);
         if (!deathTime) {
           errors.push(`Invalid time for ${bossName}: ${timeStr}`);
           continue;
         }
-        
+
         const respawnConfig = getBossRespawnTimes(bossName);
         const respawnTimeMin = new Date(deathTime.getTime() + respawnConfig.minMs);
         const respawnTimeMax = new Date(deathTime.getTime() + respawnConfig.maxMs);
-        
+
         if (respawnTimeMax.getTime() <= Date.now()) {
           errors.push(`${bossName} already respawned (died at ${timeStr} UTC)`);
           continue;
         }
-        
+
         await scheduleBossRespawn(interaction.guildId, bossName, deathTime.getTime(), respawnTimeMin.getTime(), respawnTimeMax.getTime(), interaction.channelId);
         successes.push(bossName);
       }
-      
+
       if (bossNames.length !== times.length && pairCount > 0) {
         errors.push(`Found ${bossNames.length} boss names but ${times.length} times - some may not have been restored`);
       }
-      
+
       let response = '';
       if (successes.length > 0) {
         response += `\u2705 Restored ${successes.length} boss${successes.length !== 1 ? 'es' : ''}: ${successes.join(', ')}\n`;
@@ -1244,7 +1252,7 @@ client.on('interactionCreate', async interaction => {
           response += `\n...and ${errors.length - 5} more`;
         }
       }
-      
+
       if (successes.length === 0 && errors.length === 0) {
         response = '\u274C No valid timer entries found in the pasted text.';
       }
@@ -1252,23 +1260,31 @@ client.on('interactionCreate', async interaction => {
       if (successes.length > 0) {
         updateBigBossDashboard(interaction.guildId).catch(console.error);
       }
-      
+
       await interaction.reply({ content: response, ephemeral: true });
     }
     return;
   }
-  
+
   if (!interaction.isChatInputCommand()) return;
-  
+
   const { commandName } = interaction;
-  
+
   if (commandName === 'tomb') {
     const rawBossName = interaction.options.getString('boss_name');
     const bossName = normalizeBossName(rawBossName);
+
+    if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
+      await interaction.reply({
+        content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
+        ephemeral: true
+      });
+      return;
+    }
     const timeStr = interaction.options.getString('time');
-    
+
     const deathTime = parseUTCTime(timeStr);
-    
+
     if (!deathTime) {
       await interaction.reply({
         content: '\u274C Invalid time format! Please use HH:MM format (e.g., 14:30)',
@@ -1276,46 +1292,54 @@ client.on('interactionCreate', async interaction => {
       });
       return;
     }
-    
+
     const respawnConfig = getBossRespawnTimes(bossName);
     const respawnTimeMin = new Date(deathTime.getTime() + respawnConfig.minMs);
     const respawnTimeMax = new Date(deathTime.getTime() + respawnConfig.maxMs);
-    
+
     await scheduleBossRespawn(interaction.guildId, bossName, deathTime.getTime(), respawnTimeMin.getTime(), respawnTimeMax.getTime(), interaction.channelId);
-    
+
     const embed = createStatusEmbed(interaction.guildId);
     await interaction.reply({ embeds: [embed] });
-    
+
   } else if (commandName === 'kill') {
     const rawBossName = interaction.options.getString('boss_name');
     const bossName = normalizeBossName(rawBossName);
+
+    if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
+      await interaction.reply({
+        content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
+        ephemeral: true
+      });
+      return;
+    }
     const deathTime = new Date();
     const respawnConfig = getBossRespawnTimes(bossName);
     const respawnTimeMin = new Date(deathTime.getTime() + respawnConfig.minMs);
     const respawnTimeMax = new Date(deathTime.getTime() + respawnConfig.maxMs);
-    
+
     await scheduleBossRespawn(interaction.guildId, bossName, deathTime.getTime(), respawnTimeMin.getTime(), respawnTimeMax.getTime(), interaction.channelId);
-    
+
     const embed = createStatusEmbed(interaction.guildId);
     await interaction.reply({ embeds: [embed] });
-    
+
   } else if (commandName === 'timers') {
     const embed = createStatusEmbed(interaction.guildId);
     await interaction.reply({ embeds: [embed] });
-    
+
   } else if (commandName === 'untimed') {
     const trackedBosses = Array.from(bossTimers.entries())
       .filter(([key]) => key.startsWith(`${interaction.guildId}:`))
       .map(([, timer]) => timer.bossName.toLowerCase());
-    
-    const untimedBosses = BOSS_LIST.filter(boss => 
+
+    const untimedBosses = BOSS_LIST.filter(boss =>
       !trackedBosses.includes(boss.toLowerCase())
     );
-    
+
     const embed = new EmbedBuilder()
       .setTitle('\u{1F513} Untracked Bosses')
       .setColor(0x95A5A6);
-    
+
     if (untimedBosses.length === 0) {
       embed.setDescription('All bosses are currently being tracked! \u{1F3AF}');
     } else {
@@ -1325,15 +1349,15 @@ client.on('interactionCreate', async interaction => {
       }).join('\n'));
       embed.setFooter({ text: `${untimedBosses.length} boss${untimedBosses.length !== 1 ? 'es' : ''} available to track` });
     }
-    
+
     await interaction.reply({ embeds: [embed] });
-    
+
   } else if (commandName === 'notify') {
     const guild = interaction.guild;
     const member = interaction.member;
-    
+
     const role = await getOrCreateNotificationRole(guild);
-    
+
     if (!role) {
       await interaction.reply({
         content: '\u274C Unable to create or find the notification role. Please check bot permissions.',
@@ -1341,9 +1365,9 @@ client.on('interactionCreate', async interaction => {
       });
       return;
     }
-    
+
     const hasRole = member.roles.cache.has(role.id);
-    
+
     try {
       if (hasRole) {
         await member.roles.remove(role);
@@ -1365,24 +1389,24 @@ client.on('interactionCreate', async interaction => {
         ephemeral: true
       });
     }
-    
+
   } else if (commandName === 'raid') {
     const name = interaction.options.getString('name');
-    
+
     const roles = {};
     RAID_ROLES.forEach(role => {
       roles[role] = [];
     });
-    
+
     const embed = createRaidEmbed(name, roles, interaction.guildId);
     const buttons = createRaidButtons();
-    
+
     const message = await interaction.reply({
       embeds: [embed],
       components: buttons,
       fetchReply: true
     });
-    
+
     const raidKey = createRaidKey(interaction.guildId, message.id);
     const signupData = {
       name,
@@ -1392,14 +1416,14 @@ client.on('interactionCreate', async interaction => {
       messageId: message.id,
       createdAt: Date.now()
     };
-    
+
     raidSignups.set(raidKey, signupData);
     saveRaidSignup(`raid:${raidKey}`, signupData);
-    
+
     const guildRaidKeys = Array.from(raidSignups.entries())
       .filter(([k, v]) => v.guildId === interaction.guildId)
       .sort((a, b) => (a[1].createdAt || 0) - (b[1].createdAt || 0));
-    
+
     if (guildRaidKeys.length > 10) {
       const toRemove = guildRaidKeys.slice(0, guildRaidKeys.length - 10);
       for (const [oldKey, oldData] of toRemove) {
@@ -1414,11 +1438,11 @@ client.on('interactionCreate', async interaction => {
         removeRaidSignup(`raid:${oldKey}`);
       }
     }
-    
+
   } else if (commandName === 'remove') {
     const bossName = interaction.options.getString('boss_name');
     const timerKey = createTimerKey(interaction.guildId, bossName);
-    
+
     if (!bossTimers.has(timerKey)) {
       await interaction.reply({
         content: `\u274C Boss "${bossName}" is not being tracked.`,
@@ -1426,7 +1450,7 @@ client.on('interactionCreate', async interaction => {
       });
       return;
     }
-    
+
     const timerData = bossTimers.get(timerKey);
     if (timerData.reminderTimeout) clearTimeout(timerData.reminderTimeout);
     if (timerData.cleanupTimeout) clearTimeout(timerData.cleanupTimeout);
@@ -1437,7 +1461,7 @@ client.on('interactionCreate', async interaction => {
     if (BIG_BOSS_NAMES.has(bossName.toLowerCase())) {
       updateBigBossDashboard(interaction.guildId).catch(console.error);
     }
-    
+
     await interaction.reply({
       content: `<:salute:1438508567916449942> Removed **${bossName}** from tracking.`
     });
@@ -1445,17 +1469,17 @@ client.on('interactionCreate', async interaction => {
     const modal = new ModalBuilder()
       .setCustomId('restore_timers_modal')
       .setTitle('Restore Boss Timers');
-    
+
     const timerListInput = new TextInputBuilder()
       .setCustomId('timer_list_input')
       .setLabel('Paste your /timers list here')
       .setStyle(TextInputStyle.Paragraph)
       .setPlaceholder('\u{1F3F4}\u200D\u2620\uFE0F **Drake**\n**Gryphon**\n12:00 UTC\n11:30 UTC')
       .setRequired(true);
-    
+
     const actionRow = new ActionRowBuilder().addComponents(timerListInput);
     modal.addComponents(actionRow);
-    
+
     await interaction.showModal(modal);
 
   } else if (commandName === 'rename') {
@@ -1527,7 +1551,7 @@ client.on('guildCreate', async guild => {
         option.setName('time')
           .setDescription('Death time in UTC (HH:MM format, e.g., 14:30)')
           .setRequired(true)),
-    
+
     new SlashCommandBuilder()
       .setName('kill')
       .setDescription('Log a boss death right now')
@@ -1536,19 +1560,19 @@ client.on('guildCreate', async guild => {
           .setDescription('Name of the boss')
           .setRequired(true)
           .setAutocomplete(true)),
-    
+
     new SlashCommandBuilder()
       .setName('timers')
       .setDescription('Show all active boss timers'),
-    
+
     new SlashCommandBuilder()
       .setName('untimed')
       .setDescription('Show bosses that are not currently being tracked'),
-    
+
     new SlashCommandBuilder()
       .setName('notify')
       .setDescription('Toggle boss respawn notifications on/off'),
-    
+
     new SlashCommandBuilder()
       .setName('raid')
       .setDescription('Create a raid signup sheet')
@@ -1556,7 +1580,7 @@ client.on('guildCreate', async guild => {
         option.setName('name')
           .setDescription('Name of the raid')
           .setRequired(true)),
-    
+
     new SlashCommandBuilder()
       .setName('remove')
       .setDescription('Remove a boss from tracking (useful for fixing input errors)')
@@ -1565,7 +1589,7 @@ client.on('guildCreate', async guild => {
           .setDescription('Name of the boss to remove')
           .setRequired(true)
           .setAutocomplete(true)),
-    
+
     new SlashCommandBuilder()
       .setName('restore')
       .setDescription('Bulk restore boss timers from copied /timers output'),
@@ -1592,9 +1616,9 @@ client.on('guildCreate', async guild => {
       .setName('bigbosschannel')
       .setDescription('Set this channel as the big boss timer dashboard')
   ];
-  
+
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
-  
+
   try {
     await rest.put(
       Routes.applicationGuildCommands(client.user.id, guild.id),
