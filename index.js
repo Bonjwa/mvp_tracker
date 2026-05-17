@@ -150,7 +150,7 @@ const BOSS_LIST = [
   'Eclipse',
   'Eddga',
   'Egnigem Cenia',
-  'Enraged Priest',
+  // 'Enraged Priest',
   'Evil Snake Lord',
   'Fallen Bishop',
   'Femmire',
