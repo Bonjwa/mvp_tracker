@@ -220,7 +220,7 @@ const BOSS_LIST = [
 
 const NOTIFICATION_ROLE_NAME = 'Roweener';
 
-const RAID_ROLES = ['SB', 'Devo', 'HP', 'Prof', 'Perf', 'Wiz', 'Sniper/Sinx'];
+const RAID_ROLES = ['SB', 'Devo', 'HP', 'Prof', 'Asura', 'Wiz', 'Sniper/Sinx'];
 
 const RAID_ROLE_EMOJIS = {
   'SB': '\u{1F6E1}\uFE0F',
