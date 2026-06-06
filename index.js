@@ -220,14 +220,16 @@ const BOSS_LIST = [
 
 const NOTIFICATION_ROLE_NAME = 'Roweener';
 
-const RAID_ROLES = ['SB', 'Devo', 'HP', 'Prof', 'Asura', 'Wiz', 'DPS', 'CREO'];
+const RAID_ROLES = ['SB', 'Devo', 'HP', 'LK', 'Prof', 'Asura', 'Stalker', 'Wiz', 'DPS', 'CREO'];
 
 const RAID_ROLE_EMOJIS = {
   'SB': '\u{1F6E1}\uFE0F',
   'Devo': '\u{1F6D0}',
   'HP': '\u2764\uFE0F\u200D\u{1FA79}',
+  'LK': '\u{1F6E1}\uFE0F',
   'Prof': '\u{1F393}',
   'Asura': '\u{1F3B6}',
+  'Stalker': '\u{1F575}\uFE0F',
   'Wiz': '\u2728',
   'DPS': '\u{1FA93}',
   'CREO': '\u{1FA93}'
@@ -434,52 +436,28 @@ function createRaidEmbed(name, roles, guildId) {
 }
 
 function createRaidButtons() {
-  const row1 = new ActionRowBuilder();
-  const row2 = new ActionRowBuilder();
+  const rows = [new ActionRowBuilder(), new ActionRowBuilder(), new ActionRowBuilder()];
+  const actions = [...RAID_ROLES, 'Ping', 'SecondaryRoles', 'Bump'];
 
-  const topRoles = ['SB', 'Devo', 'HP', 'Prof'];
-  const bottomRoles = ['Asura', 'Wiz', 'DPS', 'CREO'];
+  actions.forEach((action, index) => {
+    const isControl = action === 'Ping' || action === 'SecondaryRoles' || action === 'Bump';
+    const button = new ButtonBuilder().setCustomId(`raid_${action}`);
 
-  topRoles.forEach(role => {
-    row1.addComponents(
-      new ButtonBuilder()
-        .setCustomId(`raid_${role}`)
-        .setLabel(`${RAID_ROLE_EMOJIS[role]} ${role}`)
-        .setStyle(ButtonStyle.Primary)
-    );
+    if (action === 'Ping') {
+      button.setLabel('\u{1F4E3} Ping').setStyle(ButtonStyle.Success);
+    } else if (action === 'SecondaryRoles') {
+      button.setLabel('\u{1F3AD} Roles').setStyle(ButtonStyle.Secondary);
+    } else if (action === 'Bump') {
+      button.setLabel('\u2B07\uFE0F Bump').setStyle(ButtonStyle.Success);
+    } else {
+      button.setLabel(`${RAID_ROLE_EMOJIS[action] || ''} ${action}`).setStyle(ButtonStyle.Primary);
+    }
+
+    const rowIndex = Math.floor(index / 5);
+    rows[rowIndex].addComponents(button);
   });
 
-  row1.addComponents(
-    new ButtonBuilder()
-      .setCustomId('raid_Ping')
-      .setLabel('\u{1F4E3} Ping')
-      .setStyle(ButtonStyle.Success)
-  );
-
-  bottomRoles.forEach(role => {
-    row2.addComponents(
-      new ButtonBuilder()
-        .setCustomId(`raid_${role}`)
-        .setLabel(`${RAID_ROLE_EMOJIS[role]} ${role}`)
-        .setStyle(ButtonStyle.Primary)
-    );
-  });
-
-  row2.addComponents(
-    new ButtonBuilder()
-      .setCustomId('raid_SecondaryRoles')
-      .setLabel('\u{1F3AD} Roles')
-      .setStyle(ButtonStyle.Secondary)
-  );
-
-  row2.addComponents(
-    new ButtonBuilder()
-      .setCustomId('raid_Bump')
-      .setLabel('\u2B07\uFE0F Bump')
-      .setStyle(ButtonStyle.Success)
-  );
-
-  return [row1, row2];
+  return rows.filter(row => row.components.length > 0);
 }
 
 function parseUTCTime(timeStr) {
@@ -1044,7 +1022,7 @@ client.on('interactionCreate', async interaction => {
             .setCustomId(`secondaryRole_${msgId}_${role}`)
             .setLabel(`${RAID_ROLE_EMOJIS[role]} ${role}`)
             .setStyle(isSelected ? ButtonStyle.Success : ButtonStyle.Secondary);
-          if (index < 4) {
+          if (index < 5) {
             row1.addComponents(button);
           } else {
             row2.addComponents(button);
@@ -1116,7 +1094,7 @@ client.on('interactionCreate', async interaction => {
           .setCustomId(`secondaryRole_${signupMessageId}_${roleItem}`)
           .setLabel(`${RAID_ROLE_EMOJIS[roleItem]} ${roleItem}`)
           .setStyle(isSelected ? ButtonStyle.Success : ButtonStyle.Secondary);
-        if (index < 4) {
+        if (index < 5) {
           row1.addComponents(button);
         } else {
           row2.addComponents(button);
@@ -1405,18 +1383,13 @@ client.on('interactionCreate', async interaction => {
     const message = await interaction.reply({
       embeds: [embed],
       components: buttons,
-      fetchReply: true
-    });
-
-    const raidKey = createRaidKey(interaction.guildId, message.id);
-    const signupData = {
-      name,
+      withResponse: true,
       roles,
       channelId: interaction.channelId,
       guildId: interaction.guildId,
       messageId: message.id,
       createdAt: Date.now()
-    };
+    });
 
     raidSignups.set(raidKey, signupData);
     saveRaidSignup(`raid:${raidKey}`, signupData);
