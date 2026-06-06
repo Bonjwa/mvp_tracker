@@ -438,17 +438,12 @@ function createRaidEmbed(name, roles, guildId) {
 
 function createRaidButtons() {
   const rows = [new ActionRowBuilder(), new ActionRowBuilder(), new ActionRowBuilder()];
-  const actions = [...RAID_ROLES, 'Ping', 'SecondaryRoles', 'Bump'];
+  const actions = [...RAID_ROLES, 'Bump'];
 
   actions.forEach((action, index) => {
-    const isControl = action === 'Ping' || action === 'SecondaryRoles' || action === 'Bump';
     const button = new ButtonBuilder().setCustomId(`raid_${action}`);
 
-    if (action === 'Ping') {
-      button.setLabel('\u{1F4E3} Ping').setStyle(ButtonStyle.Success);
-    } else if (action === 'SecondaryRoles') {
-      button.setLabel('\u{1F3AD} Roles').setStyle(ButtonStyle.Secondary);
-    } else if (action === 'Bump') {
+    if (action === 'Bump') {
       button.setLabel('\u2B07\uFE0F Bump').setStyle(ButtonStyle.Success);
     } else {
       button.setLabel(`${RAID_ROLE_EMOJIS[action] || ''} ${action}`).setStyle(ButtonStyle.Primary);
@@ -939,37 +934,7 @@ client.on('interactionCreate', async interaction => {
         return;
       }
 
-      if (action === 'Ping') {
-        const allPlayers = new Set();
-        const mentions = [];
-        RAID_ROLES.forEach(role => {
-          const players = signupData.roles[role] || [];
-          players.forEach(p => {
-            if (!allPlayers.has(p.id)) {
-              allPlayers.add(p.id);
-              mentions.push(`<@${p.id}>`);
-            }
-          });
-        });
-
-        if (mentions.length === 0) {
-          await interaction.reply({
-            content: '\u274C No players signed up to ping.',
-            ephemeral: true
-          });
-          return;
-        }
-
-        await interaction.channel.send({
-          content: `\u{1F4E3} **${interaction.member.displayName}** pinged: ${mentions.join(' ')}`
-        });
-
-        await interaction.reply({
-          content: '\u2705 Pinged all signed up players.',
-          ephemeral: true
-        });
-
-      } else if (action === 'Bump') {
+      if (action === 'Bump') {
         const oldMessage = interaction.message;
         const embed = createRaidEmbed(signupData.name, signupData.roles, interaction.guildId);
         const buttons = createRaidButtons();
@@ -996,43 +961,6 @@ client.on('interactionCreate', async interaction => {
 
         await interaction.reply({
           content: '\u2705 Raid signup bumped.',
-          ephemeral: true
-        });
-
-      } else if (action === 'SecondaryRoles') {
-        const userId = interaction.user.id;
-        const currentSecondary = loadSecondaryRoles(interaction.guildId, userId);
-
-        const embed = new EmbedBuilder()
-          .setTitle('Your Secondary Roles')
-          .setDescription('Select roles you can also play. These will show as emojis next to your name on the signup sheet.')
-          .setColor(0x00AE86);
-
-        const currentDisplay = currentSecondary.length > 0
-          ? currentSecondary.map(r => `${RAID_ROLE_EMOJIS[r] || ''} ${r}`).join(', ')
-          : 'None';
-        embed.addFields({ name: 'Currently selected', value: currentDisplay });
-
-        const row1 = new ActionRowBuilder();
-        const row2 = new ActionRowBuilder();
-        const msgId = interaction.message.id;
-
-        RAID_ROLES.forEach((role, index) => {
-          const isSelected = currentSecondary.includes(role);
-          const button = new ButtonBuilder()
-            .setCustomId(`secondaryRole_${msgId}_${role}`)
-            .setLabel(`${RAID_ROLE_EMOJIS[role]} ${role}`)
-            .setStyle(isSelected ? ButtonStyle.Success : ButtonStyle.Secondary);
-          if (index < 5) {
-            row1.addComponents(button);
-          } else {
-            row2.addComponents(button);
-          }
-        });
-
-        await interaction.reply({
-          embeds: [embed],
-          components: [row1, row2],
           ephemeral: true
         });
 
