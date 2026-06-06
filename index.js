@@ -220,7 +220,7 @@ const BOSS_LIST = [
 
 const NOTIFICATION_ROLE_NAME = 'Roweener';
 
-const RAID_ROLES = ['SB', 'Devo', 'HP', 'LK', 'Prof', 'Asura', 'Stalker', 'Wiz', 'DPS', 'CREO'];
+const RAID_ROLES = ['SB', 'Devo', 'HP', 'LK', 'Prof', 'Asura', 'Stalker', 'Wiz', 'DPS', 'CREO', 'Dancer/Bard'];
 
 const RAID_ROLE_EMOJIS = {
   'SB': '\u{1F6E1}\uFE0F',
@@ -232,7 +232,8 @@ const RAID_ROLE_EMOJIS = {
   'Stalker': '\u{1F575}\uFE0F',
   'Wiz': '\u2728',
   'DPS': '\u{1FA93}',
-  'CREO': '\u{1FA93}'
+  'CREO': '\u{1FA93}',
+  'Dancer/Bard': '\u{1F483} \u{1F3B6}'
 };
 
 const BIGBOSS_EMOJIS = {
