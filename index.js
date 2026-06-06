@@ -429,7 +429,7 @@ function createRaidEmbed(name, roles, guildId) {
   if (allPlayers.size === 0) {
     description = 'No signups yet. Click a role button below to join!';
   } else {
-    description += `**Total:** ${allPlayers.size} players`;
+    description += `**Total:** ${allPlayers.size}/${RAID_PLAYER_LIMIT} players`;
   }
 
   embed.setDescription(description);
@@ -967,6 +967,23 @@ client.on('interactionCreate', async interaction => {
       } else if (RAID_ROLES.includes(action)) {
         const userId = interaction.user.id;
         const userName = interaction.member.displayName;
+
+        const totalPlayers = new Set();
+        let alreadySignedUp = false;
+        RAID_ROLES.forEach(r => {
+          (signupData.roles[r] || []).forEach(p => {
+            totalPlayers.add(p.id);
+            if (p.id === userId) alreadySignedUp = true;
+          });
+        });
+
+        if (!alreadySignedUp && totalPlayers.size >= RAID_PLAYER_LIMIT) {
+          await interaction.reply({
+            content: `\u274C Raid is full. Maximum ${RAID_PLAYER_LIMIT} players allowed.`,
+            ephemeral: true
+          });
+          return;
+        }
 
         const currentPlayers = signupData.roles[action] || [];
         const existingIndex = currentPlayers.findIndex(p => p.id === userId);
