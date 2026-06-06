@@ -221,6 +221,7 @@ const BOSS_LIST = [
 const NOTIFICATION_ROLE_NAME = 'Roweener';
 
 const RAID_ROLES = ['SB', 'Devo', 'HP', 'LK', 'Prof', 'Asura', 'Stalker', 'Wiz', 'DPS', 'CREO', 'Dancer/Bard'];
+const RAID_PLAYER_LIMIT = 12;
 
 const RAID_ROLE_EMOJIS = {
   'SB': '\u{1F6E1}\uFE0F',
@@ -426,13 +427,21 @@ function createRaidEmbed(name, roles, guildId) {
     players.forEach(p => allPlayers.add(p.id));
   });
 
+  const isFull = allPlayers.size >= RAID_PLAYER_LIMIT;
+
   if (allPlayers.size === 0) {
     description = 'No signups yet. Click a role button below to join!';
   } else {
     description += `**Total:** ${allPlayers.size}/${RAID_PLAYER_LIMIT} players`;
+    if (isFull) {
+      description += '\n**Status:** Party is full';
+    }
   }
 
   embed.setDescription(description);
+  if (isFull) {
+    embed.setTitle(`${name} (FULL)`);
+  }
   return embed;
 }
 
@@ -786,7 +795,10 @@ async function restoreRaidSignups() {
   console.log(`Restored ${restoredCount} raid signups, updated ${updatedCount} Discord messages`);
 }
 
-client.on('ready', async () => {
+let readyHandled = false;
+async function handleReady() {
+  if (readyHandled) return;
+  readyHandled = true;
   console.log(`Logged in as ${client.user.tag}!`);
 
   await restoreBossesFromDatabase();
@@ -888,7 +900,10 @@ client.on('ready', async () => {
   } catch (error) {
     console.error('Error registering commands:', error);
   }
-});
+}
+
+client.once('ready', handleReady);
+client.once('clientReady', handleReady);
 
 client.on('interactionCreate', async interaction => {
   if (interaction.isAutocomplete()) {
@@ -929,7 +944,7 @@ client.on('interactionCreate', async interaction => {
       if (!signupData) {
         await interaction.reply({
           content: '\u274C This raid signup is no longer active.',
-          ephemeral: true
+          flags: 1 << 6
         });
         return;
       }
@@ -961,7 +976,7 @@ client.on('interactionCreate', async interaction => {
 
         await interaction.reply({
           content: '\u2705 Raid signup bumped.',
-          ephemeral: true
+          flags: 1 << 6
         });
 
       } else if (RAID_ROLES.includes(action)) {
@@ -980,7 +995,7 @@ client.on('interactionCreate', async interaction => {
         if (!alreadySignedUp && totalPlayers.size >= RAID_PLAYER_LIMIT) {
           await interaction.reply({
             content: `\u274C Raid is full. Maximum ${RAID_PLAYER_LIMIT} players allowed.`,
-            ephemeral: true
+            flags: 1 << 6
           });
           return;
         }
@@ -1138,7 +1153,7 @@ client.on('interactionCreate', async interaction => {
         if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
           await interaction.reply({
             content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
-            ephemeral: true
+            flags: 1 << 6
           });
           return;
         }
@@ -1186,7 +1201,7 @@ client.on('interactionCreate', async interaction => {
         updateBigBossDashboard(interaction.guildId).catch(console.error);
       }
 
-      await interaction.reply({ content: response, ephemeral: true });
+      await interaction.reply({ content: response, flags: 1 << 6 });
     }
     return;
   }
@@ -1202,7 +1217,7 @@ client.on('interactionCreate', async interaction => {
     if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
       await interaction.reply({
         content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
-        ephemeral: true
+        flags: 1 << 6
       });
       return;
     }
@@ -1213,7 +1228,7 @@ client.on('interactionCreate', async interaction => {
     if (!deathTime) {
       await interaction.reply({
         content: '\u274C Invalid time format! Please use HH:MM format (e.g., 14:30)',
-        ephemeral: true
+        flags: 1 << 6
       });
       return;
     }
@@ -1234,7 +1249,7 @@ client.on('interactionCreate', async interaction => {
     if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
       await interaction.reply({
         content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
-        ephemeral: true
+        flags: 1 << 6
       });
       return;
     }
@@ -1286,7 +1301,7 @@ client.on('interactionCreate', async interaction => {
     if (!role) {
       await interaction.reply({
         content: '\u274C Unable to create or find the notification role. Please check bot permissions.',
-        ephemeral: true
+        flags: 1 << 6
       });
       return;
     }
@@ -1298,20 +1313,20 @@ client.on('interactionCreate', async interaction => {
         await member.roles.remove(role);
         await interaction.reply({
           content: '\u{1F515} You will no longer be pinged for boss respawns.',
-          ephemeral: true
+          flags: 1 << 6
         });
       } else {
         await member.roles.add(role);
         await interaction.reply({
           content: '\u2705 You\'ll now get pinged when bosses respawn!',
-          ephemeral: true
+          flags: 1 << 6
         });
       }
     } catch (error) {
       console.error('Error toggling notification role:', error);
       await interaction.reply({
         content: '\u274C Failed to toggle notifications. Make sure the bot has permission to manage roles.',
-        ephemeral: true
+        flags: 1 << 6
       });
     }
 
@@ -1329,7 +1344,7 @@ client.on('interactionCreate', async interaction => {
     const replyMessage = await interaction.reply({
       embeds: [embed],
       components: buttons,
-      fetchReply: true
+      withResponse: true
     });
 
     const signupData = {
@@ -1371,7 +1386,7 @@ client.on('interactionCreate', async interaction => {
     if (!bossTimers.has(timerKey)) {
       await interaction.reply({
         content: `\u274C Boss "${bossName}" is not being tracked.`,
-        ephemeral: true
+        flags: 1 << 6
       });
       return;
     }
@@ -1415,7 +1430,7 @@ client.on('interactionCreate', async interaction => {
     if (!bossTimers.has(oldKey)) {
       await interaction.reply({
         content: `\u274C **${wrongName}** is not currently being tracked.`,
-        ephemeral: true
+        flags: 1 << 6
       });
       return;
     }
@@ -1442,7 +1457,7 @@ client.on('interactionCreate', async interaction => {
 
     await interaction.reply({
       content: `<:salute:1438508567916449942> Renamed **${wrongName}** \u2192 **${correctName}**. Timer continues unchanged.`,
-      ephemeral: true
+      flags: 1 << 6
     });
 
   } else if (commandName === 'stay') {
@@ -1457,7 +1472,7 @@ client.on('interactionCreate', async interaction => {
     saveBigBossChannel(interaction.guildId, interaction.channelId, msg.id);
     await interaction.reply({
       content: `<:salute:1438508567916449942> Big boss dashboard set to this channel.`,
-      ephemeral: true
+      flags: 1 << 6
     });
   }
 });
