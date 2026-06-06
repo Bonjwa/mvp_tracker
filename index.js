@@ -220,16 +220,18 @@ const BOSS_LIST = [
 
 const NOTIFICATION_ROLE_NAME = 'Roweener';
 
-const RAID_ROLES = ['SB', 'Devo', 'HP', 'Prof', 'Asura', 'Wiz', 'DPS'];
+const RAID_ROLES = ['SB', 'LK', 'Devo', 'HP', 'Prof', 'Asura', 'Wiz', 'DPS (sniper/sinx/creo)', 'Dancer/Bard'];
 
 const RAID_ROLE_EMOJIS = {
   'SB': '\u{1F6E1}\uFE0F',
+  'LK': '\u{1F6E1}',
   'Devo': '\u{1F6D0}',
   'HP': '\u2764\uFE0F\u200D\u{1FA79}',
   'Prof': '\u{1F393}',
   'Asura': '\u{1F3B6}',
   'Wiz': '\u2728',
-  'DPS': '\u{1FA93}'
+  'DPS (sniper/sinx/creo)': '\u{1FA93}',
+  'Dancer/Bard': '\u{1F3B6}'
 };
 
 const BIGBOSS_EMOJIS = {
@@ -436,8 +438,8 @@ function createRaidButtons() {
   const row1 = new ActionRowBuilder();
   const row2 = new ActionRowBuilder();
 
-  const topRoles = ['Tank', 'Devo', 'HP', 'Prof'];
-  const bottomRoles = ['Asura', 'Wiz', 'DPS'];
+  const topRoles = ['SB', 'LK', 'Devo', 'HP', 'Prof'];
+  const bottomRoles = ['Asura', 'Wiz', 'DPS (sniper/sinx/creo)', 'Dancer/Bard'];
 
   topRoles.forEach(role => {
     row1.addComponents(
