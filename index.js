@@ -34,15 +34,6 @@ const client = new Client({
 
 const bossTimers = new Map();
 
-// const DEFAULT_RESPAWN_MS = 3 * 60 * 60 * 1000;
-
-// const BOSS_RESPAWN_CONFIG = {
-//   'drake': { minMs: 3 * 60 * 60 * 1000, maxMs: 4 * 60 * 60 * 1000 },
-//   'garm': { minMs: 3 * 60 * 60 * 1000, maxMs: 4 * 60 * 60 * 1000 },
-//   'orc hero': { minMs: 3 * 60 * 60 * 1000, maxMs: 4 * 60 * 60 * 1000 },
-//   'eddga': { minMs: 3 * 60 * 60 * 1000, maxMs: 4 * 60 * 60 * 1000 } 
-// };
-
 const DEFAULT_RESPAWN_MS = 1 * 60 * 60 * 1000; // 1 hour (most common MVP respawn)
 
 const BOSS_RESPAWN_CONFIG = {
@@ -125,71 +116,52 @@ function getBossRespawnTimes(bossName) {
   }
   return { minMs: DEFAULT_RESPAWN_MS, maxMs: DEFAULT_RESPAWN_MS };
 }
+
 const BOSS_LIST = [
   'Amon Ra',
   'Arc Angeling',
   'Angeling',
-  // 'Anubis',
-  // 'Araccryo',
   'Assassin Cross Eremes',
   'Atroce ra_fild02',
   'Atroce ra_fild03',
   'Atroce ra_fild04',
   'Atroce ve_fild01',
   'Atroce ve_fild02',
-  // 'Baihu',
   'Baphomet',
   'Beelzebub',
-  // 'Brain Sucker',
-  // 'Byrogue',
-  // 'Chepet',
-  // 'Chimera',
   'Dark Lord',
   'Detardeurus',
   'Deviling',
   'Doppelganger',
-  // 'Dragon Fly',
   'Drake',
   'Dracula',
   'Eclipse',
   'Eddga',
   'Egnigem Cenia',
-  // 'Enraged Priest',
   'Evil Snake Lord',
   'Fallen Bishop',
-  // 'Femmire',
   'Ghostring treasure02',
   'Ghostring pay_fild04',
   'Gloom Under Night',
-  // 'Goblin Leader',
   'Golden Thief Bug',
   'Gopinch',
   'Garm',
-  // 'Gryphon',
   'Hatii',
   'High Priest Margaretha',
   'High Wizard Kathryne',
   'Hydrolancer',
   'Ifrit',
-  // 'Iskralisa',
-  // 'Ju-On',
   'Kiel-D-01',
-  // 'Kobold Leader',
   'Ktullanux',
   'Kublin',
   'Lady Tanee',
-  // 'Lockstep',
   'Lord Knight Seyren',
   'Lord of the Dead',
-  // 'Mastering',
   'Master Smith Howard',
   'Maya',
   'Maya Purple',
-  // 'Mime Monkey',
   'Mistress',
   'Moonlight Flower',
-  // 'Morajin',
-  // 'Necromancer',
   'Orc Hero',
   'Orc Lord',
   'Osiris',
@@ -197,31 +169,22 @@ const BOSS_LIST = [
   'Phreeoni',
   'RSX 0806',
   'Samurai Specter',
-  // 'Silver Thief Bug',
   'Sniper Cecil',
   'Stormy Knight',
-  // 'Taffy',
   'Tao Gunka',
-  // 'Tattler Sisters',
-  // 'Toad',
   'Turtle General',
-  // 'Vagabond Wolf',
   'Valkyrie odin_tem02',
   'Valkyrie odin_tem03 #1',
   'Valkyrie odin_tem03 #2',
   'Valkyrie Randgris',
   'Vesper',
-  // 'Vocal',
-  // 'Vodyanoy',
   'White Lady',
   'Wounded Morocc',
-  // 'Zealotus',
 ].sort();
 
 const NOTIFICATION_ROLE_NAME = 'Roweener';
 
 const RAID_ROLES = ['SB', 'Devo', 'HP', 'LK', 'Prof', 'Asura', 'Stalker', 'Wiz', 'DPS', 'CREO', 'Dancer/Bard'];
-const RAID_PLAYER_LIMIT = 12;
 
 const RAID_ROLE_EMOJIS = {
   'SB': '\u{1F6E1}\uFE0F',
@@ -247,6 +210,9 @@ const BIGBOSS_EMOJIS = {
 const BIG_BOSS_NAMES = new Set(Object.keys(BOSS_RESPAWN_CONFIG));
 
 const raidSignups = new Map();
+
+// Maximum number of players allowed in a raid
+const RAID_MAX_PLAYERS = 12;
 
 function createTimerKey(guildId, bossName) {
   return `${guildId}:${bossName.toLowerCase()}`;
@@ -404,16 +370,35 @@ function loadSecondaryRoles(guildId, userId) {
   return data[`secondaryRoles:${guildId}_${userId}`] || [];
 }
 
+/**
+ * Returns a flat ordered list of all signed-up players across all roles,
+ * preserving the order they joined (by role order, then join order within each role).
+ */
+function getAllSignedUpPlayers(roles) {
+  const seen = new Set();
+  const ordered = [];
+  for (const role of RAID_ROLES) {
+    for (const p of (roles[role] || [])) {
+      if (!seen.has(p.id)) {
+        seen.add(p.id);
+        ordered.push(p);
+      }
+    }
+  }
+  return ordered;
+}
+
 function createRaidEmbed(name, roles, guildId) {
   const embed = new EmbedBuilder()
     .setTitle(name)
     .setColor(0x00AE86);
 
   let description = '';
-  const allPlayers = new Set();
+  const allPlayers = getAllSignedUpPlayers(roles);
+  const acceptedIds = new Set(allPlayers.slice(0, RAID_MAX_PLAYERS).map(p => p.id));
 
   RAID_ROLES.forEach(role => {
-    const players = roles[role] || [];
+    const players = (roles[role] || []).filter(p => acceptedIds.has(p.id));
     if (players.length === 0) return;
 
     const emoji = RAID_ROLE_EMOJIS[role] || '';
@@ -424,24 +409,24 @@ function createRaidEmbed(name, roles, guildId) {
       return secondaryEmojis ? `${p.name} (${secondaryEmojis})` : p.name;
     });
     description += `${emoji} **${role}** (${players.length})\n${playerNames.join('\n')}\n\n`;
-    players.forEach(p => allPlayers.add(p.id));
   });
 
-  const isFull = allPlayers.size >= RAID_PLAYER_LIMIT;
-
-  if (allPlayers.size === 0) {
+  if (allPlayers.length === 0) {
     description = 'No signups yet. Click a role button below to join!';
   } else {
-    description += `**Total:** ${allPlayers.size}/${RAID_PLAYER_LIMIT} players`;
-    if (isFull) {
-      description += '\n**Status:** Party is full';
+    description += `**Total:** ${Math.min(allPlayers.length, RAID_MAX_PLAYERS)}/${RAID_MAX_PLAYERS} players`;
+
+    // Show the first overflow player (slot 13) if present
+    if (allPlayers.length > RAID_MAX_PLAYERS) {
+      const waitlisted = allPlayers[RAID_MAX_PLAYERS]; // index 12 = 13th person
+      description += `\n\n⏳ **Waitlist:** ${waitlisted.name}`;
+      if (allPlayers.length > RAID_MAX_PLAYERS + 1) {
+        description += ` *(+${allPlayers.length - RAID_MAX_PLAYERS - 1} more)*`;
+      }
     }
   }
 
   embed.setDescription(description);
-  if (isFull) {
-    embed.setTitle(`${name} (FULL)`);
-  }
   return embed;
 }
 
@@ -499,23 +484,6 @@ function parseUTCTime(timeStr) {
   }
 
   return deathTime;
-}
-
-function formatTimeRemaining(ms) {
-  if (ms <= 0) return 'Respawned!';
-
-  const totalSeconds = Math.floor(ms / 1000);
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  if (hours > 0) {
-    return `${hours}h ${minutes}m ${seconds}s`;
-  } else if (minutes > 0) {
-    return `${minutes}m ${seconds}s`;
-  } else {
-    return `${seconds}s`;
-  }
 }
 
 function formatUTCTime(date) {
@@ -795,93 +763,90 @@ async function restoreRaidSignups() {
   console.log(`Restored ${restoredCount} raid signups, updated ${updatedCount} Discord messages`);
 }
 
-let readyHandled = false;
-async function handleReady() {
-  if (readyHandled) return;
-  readyHandled = true;
+const SLASH_COMMANDS = [
+  new SlashCommandBuilder()
+    .setName('tomb')
+    .setDescription('Log a boss death at a specific UTC time')
+    .addStringOption(option =>
+      option.setName('boss_name')
+        .setDescription('Name of the boss')
+        .setRequired(true)
+        .setAutocomplete(true))
+    .addStringOption(option =>
+      option.setName('time')
+        .setDescription('Death time in UTC (HH:MM format, e.g., 14:30)')
+        .setRequired(true)),
+
+  new SlashCommandBuilder()
+    .setName('kill')
+    .setDescription('Log a boss death right now')
+    .addStringOption(option =>
+      option.setName('boss_name')
+        .setDescription('Name of the boss')
+        .setRequired(true)
+        .setAutocomplete(true)),
+
+  new SlashCommandBuilder()
+    .setName('timers')
+    .setDescription('Show all active boss timers'),
+
+  new SlashCommandBuilder()
+    .setName('untimed')
+    .setDescription('Show bosses that are not currently being tracked'),
+
+  new SlashCommandBuilder()
+    .setName('notify')
+    .setDescription('Toggle boss respawn notifications on/off'),
+
+  new SlashCommandBuilder()
+    .setName('raid')
+    .setDescription('Create a raid signup sheet')
+    .addStringOption(option =>
+      option.setName('name')
+        .setDescription('Name of the raid')
+        .setRequired(true)),
+
+  new SlashCommandBuilder()
+    .setName('remove')
+    .setDescription('Remove a boss from tracking (useful for fixing input errors)')
+    .addStringOption(option =>
+      option.setName('boss_name')
+        .setDescription('Name of the boss to remove')
+        .setRequired(true)
+        .setAutocomplete(true)),
+
+  new SlashCommandBuilder()
+    .setName('restore')
+    .setDescription('Bulk restore boss timers by pasting a /timers list'),
+
+  new SlashCommandBuilder()
+    .setName('rename')
+    .setDescription('Fix a boss name that was logged with a typo')
+    .addStringOption(option =>
+      option.setName('wrong_name')
+        .setDescription('The incorrectly spelled name currently being tracked')
+        .setRequired(true)
+        .setAutocomplete(true))
+    .addStringOption(option =>
+      option.setName('correct_name')
+        .setDescription('The correct boss name')
+        .setRequired(true)
+        .setAutocomplete(true)),
+
+  new SlashCommandBuilder()
+    .setName('stay')
+    .setDescription('Lock respawn announcements to this channel for the whole server'),
+
+  new SlashCommandBuilder()
+    .setName('bigbosschannel')
+    .setDescription('Set this channel as the big boss timer dashboard')
+];
+
+client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   await restoreBossesFromDatabase();
   await restoreRaidSignups();
-
-  const commands = [
-    new SlashCommandBuilder()
-      .setName('tomb')
-      .setDescription('Log a boss death at a specific UTC time')
-      .addStringOption(option =>
-        option.setName('boss_name')
-          .setDescription('Name of the boss')
-          .setRequired(true)
-          .setAutocomplete(true))
-      .addStringOption(option =>
-        option.setName('time')
-          .setDescription('Death time in UTC (HH:MM format, e.g., 14:30)')
-          .setRequired(true)),
-
-    new SlashCommandBuilder()
-      .setName('kill')
-      .setDescription('Log a boss death right now')
-      .addStringOption(option =>
-        option.setName('boss_name')
-          .setDescription('Name of the boss')
-          .setRequired(true)
-          .setAutocomplete(true)),
-
-    new SlashCommandBuilder()
-      .setName('timers')
-      .setDescription('Show all active boss timers'),
-
-    new SlashCommandBuilder()
-      .setName('untimed')
-      .setDescription('Show bosses that are not currently being tracked'),
-
-    new SlashCommandBuilder()
-      .setName('notify')
-      .setDescription('Toggle boss respawn notifications on/off'),
-
-    new SlashCommandBuilder()
-      .setName('raid')
-      .setDescription('Create a raid signup sheet')
-      .addStringOption(option =>
-        option.setName('name')
-          .setDescription('Name of the raid')
-          .setRequired(true)),
-
-    new SlashCommandBuilder()
-      .setName('remove')
-      .setDescription('Remove a boss from tracking (useful for fixing input errors)')
-      .addStringOption(option =>
-        option.setName('boss_name')
-          .setDescription('Name of the boss to remove')
-          .setRequired(true)
-          .setAutocomplete(true)),
-
-    new SlashCommandBuilder()
-      .setName('restore')
-      .setDescription('Bulk restore boss timers by pasting a /timers list'),
-
-    new SlashCommandBuilder()
-      .setName('rename')
-      .setDescription('Fix a boss name that was logged with a typo')
-      .addStringOption(option =>
-        option.setName('wrong_name')
-          .setDescription('The incorrectly spelled name currently being tracked')
-          .setRequired(true)
-          .setAutocomplete(true))
-      .addStringOption(option =>
-        option.setName('correct_name')
-          .setDescription('The correct boss name')
-          .setRequired(true)
-          .setAutocomplete(true)),
-
-    new SlashCommandBuilder()
-      .setName('stay')
-      .setDescription('Lock respawn announcements to this channel for the whole server'),
-
-    new SlashCommandBuilder()
-      .setName('bigbosschannel')
-      .setDescription('Set this channel as the big boss timer dashboard')
-  ];
 
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
@@ -891,7 +856,7 @@ async function handleReady() {
     for (const guild of client.guilds.cache.values()) {
       await rest.put(
         Routes.applicationGuildCommands(client.user.id, guild.id),
-        { body: commands }
+        { body: SLASH_COMMANDS }
       );
       console.log(`Commands registered for guild: ${guild.name}`);
     }
@@ -900,10 +865,7 @@ async function handleReady() {
   } catch (error) {
     console.error('Error registering commands:', error);
   }
-}
-
-client.once('ready', handleReady);
-client.once('clientReady', handleReady);
+});
 
 client.on('interactionCreate', async interaction => {
   if (interaction.isAutocomplete()) {
@@ -944,7 +906,7 @@ client.on('interactionCreate', async interaction => {
       if (!signupData) {
         await interaction.reply({
           content: '\u274C This raid signup is no longer active.',
-          flags: 1 << 6
+          ephemeral: true
         });
         return;
       }
@@ -976,49 +938,55 @@ client.on('interactionCreate', async interaction => {
 
         await interaction.reply({
           content: '\u2705 Raid signup bumped.',
-          flags: 1 << 6
+          ephemeral: true
         });
 
       } else if (RAID_ROLES.includes(action)) {
         const userId = interaction.user.id;
         const userName = interaction.member.displayName;
 
-        const totalPlayers = new Set();
-        let alreadySignedUp = false;
-        RAID_ROLES.forEach(r => {
-          (signupData.roles[r] || []).forEach(p => {
-            totalPlayers.add(p.id);
-            if (p.id === userId) alreadySignedUp = true;
-          });
-        });
+        // Check if this user is already signed up somewhere
+        const alreadySignedUp = RAID_ROLES.some(r =>
+          (signupData.roles[r] || []).some(p => p.id === userId)
+        );
 
-        if (!alreadySignedUp && totalPlayers.size >= RAID_PLAYER_LIMIT) {
-          await interaction.reply({
-            content: `\u274C Raid is full. Maximum ${RAID_PLAYER_LIMIT} players allowed.`,
-            flags: 1 << 6
-          });
-          return;
+        if (!alreadySignedUp) {
+          // New signup — check if raid is already full (12 players)
+          const currentTotal = getAllSignedUpPlayers(signupData.roles).length;
+          if (currentTotal >= RAID_MAX_PLAYERS) {
+            await interaction.reply({
+              content: `\u274C The raid is full (${RAID_MAX_PLAYERS}/${RAID_MAX_PLAYERS} players). You cannot join at this time.`,
+              ephemeral: true
+            });
+            return;
+          }
         }
+
+        // Remove from any existing role slot first
+        RAID_ROLES.forEach(r => {
+          signupData.roles[r] = (signupData.roles[r] || []).filter(p => p.id !== userId);
+        });
 
         const currentPlayers = signupData.roles[action] || [];
         const existingIndex = currentPlayers.findIndex(p => p.id === userId);
 
         if (existingIndex !== -1) {
+          // Player clicked their current role — unsign them
           currentPlayers.splice(existingIndex, 1);
           signupData.roles[action] = currentPlayers;
         } else {
-          RAID_ROLES.forEach(r => {
-            signupData.roles[r] = (signupData.roles[r] || []).filter(p => p.id !== userId);
-          });
-          signupData.roles[action] = signupData.roles[action] || [];
+          // Add to new role
+          signupData.roles[action] = currentPlayers;
           signupData.roles[action].push({ id: userId, name: userName });
         }
+
         raidSignups.set(raidKey, signupData);
         saveRaidSignup(`raid:${raidKey}`, signupData);
 
         const embed = createRaidEmbed(signupData.name, signupData.roles, interaction.guildId);
         await interaction.update({ embeds: [embed] });
       }
+
     } else if (interaction.customId.startsWith('secondaryRole_')) {
       const parts = interaction.customId.split('_');
       const signupMessageId = parts[1];
@@ -1088,6 +1056,7 @@ client.on('interactionCreate', async interaction => {
           }
         }
       }
+
     } else if (interaction.customId.startsWith('kill_boss_')) {
       const bossName = interaction.customId.replace('kill_boss_', '');
       const deathTime = new Date();
@@ -1153,7 +1122,7 @@ client.on('interactionCreate', async interaction => {
         if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
           await interaction.reply({
             content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
-            flags: 1 << 6
+            ephemeral: true
           });
           return;
         }
@@ -1201,7 +1170,7 @@ client.on('interactionCreate', async interaction => {
         updateBigBossDashboard(interaction.guildId).catch(console.error);
       }
 
-      await interaction.reply({ content: response, flags: 1 << 6 });
+      await interaction.reply({ content: response, ephemeral: true });
     }
     return;
   }
@@ -1217,7 +1186,7 @@ client.on('interactionCreate', async interaction => {
     if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
       await interaction.reply({
         content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
-        flags: 1 << 6
+        ephemeral: true
       });
       return;
     }
@@ -1228,7 +1197,7 @@ client.on('interactionCreate', async interaction => {
     if (!deathTime) {
       await interaction.reply({
         content: '\u274C Invalid time format! Please use HH:MM format (e.g., 14:30)',
-        flags: 1 << 6
+        ephemeral: true
       });
       return;
     }
@@ -1249,7 +1218,7 @@ client.on('interactionCreate', async interaction => {
     if (!BOSS_LIST.some(b => b.toLowerCase() === bossName.toLowerCase())) {
       await interaction.reply({
         content: `❌ Unknown boss "${bossName}". Use the autocomplete suggestions.`,
-        flags: 1 << 6
+        ephemeral: true
       });
       return;
     }
@@ -1301,7 +1270,7 @@ client.on('interactionCreate', async interaction => {
     if (!role) {
       await interaction.reply({
         content: '\u274C Unable to create or find the notification role. Please check bot permissions.',
-        flags: 1 << 6
+        ephemeral: true
       });
       return;
     }
@@ -1313,20 +1282,20 @@ client.on('interactionCreate', async interaction => {
         await member.roles.remove(role);
         await interaction.reply({
           content: '\u{1F515} You will no longer be pinged for boss respawns.',
-          flags: 1 << 6
+          ephemeral: true
         });
       } else {
         await member.roles.add(role);
         await interaction.reply({
           content: '\u2705 You\'ll now get pinged when bosses respawn!',
-          flags: 1 << 6
+          ephemeral: true
         });
       }
     } catch (error) {
       console.error('Error toggling notification role:', error);
       await interaction.reply({
         content: '\u274C Failed to toggle notifications. Make sure the bot has permission to manage roles.',
-        flags: 1 << 6
+        ephemeral: true
       });
     }
 
@@ -1341,12 +1310,14 @@ client.on('interactionCreate', async interaction => {
     const embed = createRaidEmbed(name, roles, interaction.guildId);
     const buttons = createRaidButtons();
 
+    // Send the reply and get the Message object back via fetchReply
     const replyMessage = await interaction.reply({
       embeds: [embed],
       components: buttons,
-      withResponse: true
+      fetchReply: true
     });
 
+    const raidKey = createRaidKey(interaction.guildId, replyMessage.id);
     const signupData = {
       name,
       roles,
@@ -1356,10 +1327,10 @@ client.on('interactionCreate', async interaction => {
       createdAt: Date.now()
     };
 
-    const raidKey = createRaidKey(interaction.guildId, replyMessage.id);
     raidSignups.set(raidKey, signupData);
     saveRaidSignup(`raid:${raidKey}`, signupData);
 
+    // Cleanup old raids (keep max 10 per guild)
     const guildRaidKeys = Array.from(raidSignups.entries())
       .filter(([k, v]) => v.guildId === interaction.guildId)
       .sort((a, b) => (a[1].createdAt || 0) - (b[1].createdAt || 0));
@@ -1386,7 +1357,7 @@ client.on('interactionCreate', async interaction => {
     if (!bossTimers.has(timerKey)) {
       await interaction.reply({
         content: `\u274C Boss "${bossName}" is not being tracked.`,
-        flags: 1 << 6
+        ephemeral: true
       });
       return;
     }
@@ -1405,6 +1376,7 @@ client.on('interactionCreate', async interaction => {
     await interaction.reply({
       content: `<:salute:1438508567916449942> Removed **${bossName}** from tracking.`
     });
+
   } else if (commandName === 'restore') {
     const modal = new ModalBuilder()
       .setCustomId('restore_timers_modal')
@@ -1430,7 +1402,7 @@ client.on('interactionCreate', async interaction => {
     if (!bossTimers.has(oldKey)) {
       await interaction.reply({
         content: `\u274C **${wrongName}** is not currently being tracked.`,
-        flags: 1 << 6
+        ephemeral: true
       });
       return;
     }
@@ -1457,7 +1429,7 @@ client.on('interactionCreate', async interaction => {
 
     await interaction.reply({
       content: `<:salute:1438508567916449942> Renamed **${wrongName}** \u2192 **${correctName}**. Timer continues unchanged.`,
-      flags: 1 << 6
+      ephemeral: true
     });
 
   } else if (commandName === 'stay') {
@@ -1472,97 +1444,18 @@ client.on('interactionCreate', async interaction => {
     saveBigBossChannel(interaction.guildId, interaction.channelId, msg.id);
     await interaction.reply({
       content: `<:salute:1438508567916449942> Big boss dashboard set to this channel.`,
-      flags: 1 << 6
+      ephemeral: true
     });
   }
 });
 
 client.on('guildCreate', async guild => {
-  const commands = [
-    new SlashCommandBuilder()
-      .setName('tomb')
-      .setDescription('Log a boss death at a specific UTC time')
-      .addStringOption(option =>
-        option.setName('boss_name')
-          .setDescription('Name of the boss')
-          .setRequired(true)
-          .setAutocomplete(true))
-      .addStringOption(option =>
-        option.setName('time')
-          .setDescription('Death time in UTC (HH:MM format, e.g., 14:30)')
-          .setRequired(true)),
-
-    new SlashCommandBuilder()
-      .setName('kill')
-      .setDescription('Log a boss death right now')
-      .addStringOption(option =>
-        option.setName('boss_name')
-          .setDescription('Name of the boss')
-          .setRequired(true)
-          .setAutocomplete(true)),
-
-    new SlashCommandBuilder()
-      .setName('timers')
-      .setDescription('Show all active boss timers'),
-
-    new SlashCommandBuilder()
-      .setName('untimed')
-      .setDescription('Show bosses that are not currently being tracked'),
-
-    new SlashCommandBuilder()
-      .setName('notify')
-      .setDescription('Toggle boss respawn notifications on/off'),
-
-    new SlashCommandBuilder()
-      .setName('raid')
-      .setDescription('Create a raid signup sheet')
-      .addStringOption(option =>
-        option.setName('name')
-          .setDescription('Name of the raid')
-          .setRequired(true)),
-
-    new SlashCommandBuilder()
-      .setName('remove')
-      .setDescription('Remove a boss from tracking (useful for fixing input errors)')
-      .addStringOption(option =>
-        option.setName('boss_name')
-          .setDescription('Name of the boss to remove')
-          .setRequired(true)
-          .setAutocomplete(true)),
-
-    new SlashCommandBuilder()
-      .setName('restore')
-      .setDescription('Bulk restore boss timers from copied /timers output'),
-
-    new SlashCommandBuilder()
-      .setName('rename')
-      .setDescription('Fix a boss name that was logged with a typo')
-      .addStringOption(option =>
-        option.setName('wrong_name')
-          .setDescription('The incorrectly spelled name currently being tracked')
-          .setRequired(true)
-          .setAutocomplete(true))
-      .addStringOption(option =>
-        option.setName('correct_name')
-          .setDescription('The correct boss name')
-          .setRequired(true)
-          .setAutocomplete(true)),
-
-    new SlashCommandBuilder()
-      .setName('stay')
-      .setDescription('Lock respawn announcements to this channel for the whole server'),
-
-    new SlashCommandBuilder()
-      .setName('bigbosschannel')
-      .setDescription('Set this channel as the big boss timer dashboard')
-  ];
-
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
   try {
     await rest.put(
       Routes.applicationGuildCommands(client.user.id, guild.id),
-      { body: commands }
+      { body: SLASH_COMMANDS }
     );
     console.log(`Commands registered for new guild: ${guild.name}`);
   } catch (error) {
