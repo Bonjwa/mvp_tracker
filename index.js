@@ -220,16 +220,16 @@ const BOSS_LIST = [
 
 const NOTIFICATION_ROLE_NAME = 'Roweener';
 
-const RAID_ROLES = ['Tank', 'Devo', 'HP', 'Prof', 'Perf', 'AoE', 'DPS'];
+const RAID_ROLES = ['SB', 'Devo', 'HP', 'Prof', 'Perf', 'Wiz', 'Sniper/Sinx'];
 
 const RAID_ROLE_EMOJIS = {
-  'Tank': '\u{1F6E1}\uFE0F',
+  'SB': '\u{1F6E1}\uFE0F',
   'Devo': '\u{1F6D0}',
   'HP': '\u2764\uFE0F\u200D\u{1FA79}',
   'Prof': '\u{1F393}',
-  'Perf': '\u{1F3B6}',
-  'AoE': '\u2728',
-  'DPS': '\u{1FA93}'
+  'Asura': '\u{1F3B6}',
+  'Wiz': '\u2728',
+  'Sniper/Sinx': '\u{1FA93}'
 };
 
 const BIGBOSS_EMOJIS = {
