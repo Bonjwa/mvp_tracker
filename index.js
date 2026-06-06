@@ -1380,17 +1380,22 @@ client.on('interactionCreate', async interaction => {
     const embed = createRaidEmbed(name, roles, interaction.guildId);
     const buttons = createRaidButtons();
 
-    const message = await interaction.reply({
+    const replyMessage = await interaction.reply({
       embeds: [embed],
       components: buttons,
-      withResponse: true,
+      fetchReply: true
+    });
+
+    const signupData = {
+      name,
       roles,
       channelId: interaction.channelId,
       guildId: interaction.guildId,
-      messageId: message.id,
+      messageId: replyMessage.id,
       createdAt: Date.now()
-    });
+    };
 
+    const raidKey = createRaidKey(interaction.guildId, replyMessage.id);
     raidSignups.set(raidKey, signupData);
     saveRaidSignup(`raid:${raidKey}`, signupData);
 
