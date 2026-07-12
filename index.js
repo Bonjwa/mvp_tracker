@@ -65,7 +65,7 @@ const BOSS_RESPAWN_CONFIG = {
   'maya': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },
   'maya purple': { minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },
   'gopinch': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
-  'ghostring treasure02': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
+  'ghostring (SunkenShip)': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
   'ghostring pay_fild04': { minMs: 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
   // Mid-High Difficulty
   'doppelganger': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
@@ -83,6 +83,8 @@ const BOSS_RESPAWN_CONFIG = {
   'baphomet': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Labyrinth Forest 3: 2h
   'dark lord': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Glast Heim Churchyard: 1h
   'detardeurus': { minMs: 3 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },   // Abyss Lake 3: 3h
+  'Deviling (yuno_fild03)': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 }, // Develing 1 h
+  'Deviling (pay_fild04)': {minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 }, // Develing 1 h
   'ifrit': { minMs: 11 * 60 * 60 * 1000, maxMs: 11 * 60 * 60 * 1000 },  // Thor's Volcano 3: 11h
   'lord of the dead': { minMs: 133 * 60 * 1000, maxMs: 133 * 60 * 1000 },       // Niflheim: 133min
   'orc lord': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Field 10: 2h
@@ -131,7 +133,8 @@ const BOSS_LIST = [
   'Beelzebub',
   'Dark Lord',
   'Detardeurus',
-  'Deviling',
+  'Deviling (yuno_fild03)',
+  'Deviling (pay_fild04)',
   'Doppelganger',
   'Drake',
   'Dracula',
@@ -140,7 +143,7 @@ const BOSS_LIST = [
   'Egnigem Cenia',
   'Evil Snake Lord',
   'Fallen Bishop',
-  'Ghostring treasure02',
+  'Ghostring (SunkenShip)',
   'Ghostring pay_fild04',
   'Gloom Under Night',
   'Golden Thief Bug',
