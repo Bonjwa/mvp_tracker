@@ -39,16 +39,16 @@ const DEFAULT_RESPAWN_MS = 1 * 60 * 60 * 1000; // 1 hour (most common MVP respaw
 const BOSS_RESPAWN_CONFIG = {
   // Low Difficulty
   'eddga': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Payon Field 10: 2h
-  'Eddga (gld_dun01)': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 70 * 60 * 1000},
+  'eddga gld_dun01': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 70 * 60 * 1000},
   'tao gunka': { minMs: 5 * 60 * 60 * 1000, maxMs: 5 * 60 * 60 * 1000 },   // Beach Dungeon: 5h
   'amon ra': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Pyramid B2F: 1h
   'dracula': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Geffen Dungeon 2: 1h
   'golden thief bug': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Prontera Culvert 4: 1h
   'phreeoni': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Morroc Field 15: 2h
   'arc angeling': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },
-  'angeling (pay_fild04)': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 },
-  'Angeling (yuno_fild03)': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 },
-  'Angeling (xmas_dun01)': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000},
+  'angeling pay_fild04': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 },
+  'Angeling yuno_fild03': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 },
+  'Angeling xmas_dun01': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000},
 
   // Medium Difficulty
   'atroce ra_fild02': { minMs: 4 * 60 * 60 * 1000, maxMs: 250 * 60 * 1000 },
@@ -66,14 +66,14 @@ const BOSS_RESPAWN_CONFIG = {
   'hatii': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Lutie Field: 2h
   'turtle general': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Turtle Island 4: 1h
   'maya': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },
-  'Maya (gld_dun03)': {minMs: 8 * 60 * 60 * 1000, maxMs : 8 * 70 & 60 * 1000},
+  'maya gld_dun03': {minMs: 8 * 60 * 60 * 1000, maxMs : 8 * 70 & 60 * 1000},
   'maya purple': { minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },
   'gopinch': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
-  'ghostring (SunkenShip)': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
+  'ghostring SunkenShip': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
   'ghostring pay_fild04': { minMs: 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
   // Mid-High Difficulty
   'doppelganger': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
-  'Doppelganger (gld_dun02)': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 60 * 1000 },
+  'doppelganger gld_dun02': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 60 * 1000 },
   'egnigem cenia': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Somatology Lab 2: 2h
   'kiel-d-01': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Kiel Dungeon 2: 2h
   'orc hero': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Geffen Field 12: 1h
@@ -87,10 +87,10 @@ const BOSS_RESPAWN_CONFIG = {
   // High Difficulty
   'baphomet': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Labyrinth Forest 3: 2h
   'dark lord': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Glast Heim Churchyard: 1h
-  'Dark Lord (gld_dun04)': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 70 * 1000},
+  'dark Lord gld_dun04': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 70 * 1000},
   'detardeurus': { minMs: 3 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },   // Abyss Lake 3: 3h
-  'Deviling (yuno_fild03)': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 }, // Develing 1 h
-  'Deviling (pay_fild04)': {minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 }, // Develing 1 h
+  'deviling yuno_fild03': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 }, // Develing 1 h
+  'deviling pay_fild04': {minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 }, // Develing 1 h
   'ifrit': { minMs: 11 * 60 * 60 * 1000, maxMs: 11 * 60 * 60 * 1000 },  // Thor's Volcano 3: 11h
   'lord of the dead': { minMs: 133 * 60 * 1000, maxMs: 133 * 60 * 1000 },       // Niflheim: 133min
   'orc lord': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Field 10: 2h
@@ -128,9 +128,9 @@ function getBossRespawnTimes(bossName) {
 const BOSS_LIST = [
   'Amon Ra',
   'Arc Angeling',
-  'Angeling (pay_fild04)',
-  'Angeling (yuno_fild03)',
-  'Angeling (xmas_dun01)',
+  'Angeling pay_fild04',
+  'Angeling yuno_fild03',
+  'Angeling xmas_dun01',
   'Assassin Cross Eremes',
   'Atroce ra_fild02',
   'Atroce ra_fild03',
@@ -140,21 +140,21 @@ const BOSS_LIST = [
   'Baphomet',
   'Beelzebub',
   'Dark Lord',
-  'Dark Lord (gld_dun04)',
+  'Dark Lord gld_dun04',
   'Detardeurus',
-  'Deviling (yuno_fild03)',
-  'Deviling (pay_fild04)',
+  'Deviling yuno_fild03',
+  'Deviling pay_fild04',
   'Doppelganger',
-  'Doppelganger (gld_dun02)',
+  'Doppelganger gld_dun02',
   'Drake',
   'Dracula',
   'Eclipse',
   'Eddga',
-  'Eddga (gld_dun01)',
+  'Eddga gld_dun01',
   'Egnigem Cenia',
   'Evil Snake Lord',
   'Fallen Bishop',
-  'Ghostring (SunkenShip)',
+  'Ghostring SunkenShip',
   'Ghostring pay_fild04',
   'Gloom Under Night',
   'Golden Thief Bug',
@@ -173,7 +173,7 @@ const BOSS_LIST = [
   'Lord of the Dead',
   'Master Smith Howard',
   'Maya',
-  'Maya (gld_dun03)',
+  'Maya gld_dun03',
   'Maya Purple',
   'Mistress',
   'Moonlight Flower',
