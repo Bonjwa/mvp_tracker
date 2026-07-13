@@ -69,7 +69,7 @@ const BOSS_RESPAWN_CONFIG = {
   'maya gld_dun03': {minMs: 8 * 60 * 60 * 1000, maxMs : 8 * 70 & 60 * 1000},
   'maya purple': { minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },
   'gopinch': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
-  'shostring sunkenship': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
+  'ghostring sunkenship': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
   'ghostring pay_fild04': { minMs: 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
   // Mid-High Difficulty
   'doppelganger': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
@@ -154,7 +154,7 @@ const BOSS_LIST = [
   'Egnigem Cenia',
   'Evil Snake Lord',
   'Fallen Bishop',
-  'Ghostring SunkenShip',
+  'Ghostring sunkenship',
   'Ghostring pay_fild04',
   'Gloom Under Night',
   'Golden Thief Bug',
