@@ -73,7 +73,7 @@ const BOSS_RESPAWN_CONFIG = {
   'ghostring pay_fild04': { minMs: 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
   // Mid-High Difficulty
   'doppelganger': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
-  'Doppelganger (gld_dun02)': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 70 * 1000 },
+  'Doppelganger (gld_dun02)': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 60 * 1000 },
   'egnigem cenia': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Somatology Lab 2: 2h
   'kiel-d-01': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Kiel Dungeon 2: 2h
   'orc hero': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Geffen Field 12: 1h
