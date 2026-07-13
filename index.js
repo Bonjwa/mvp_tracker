@@ -47,8 +47,8 @@ const BOSS_RESPAWN_CONFIG = {
   'phreeoni': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Morroc Field 15: 2h
   'arc angeling': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },
   'angeling pay_fild04': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 },
-  'Angeling yuno_fild03': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 },
-  'Angeling xmas_dun01': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000},
+  'angeling yuno_fild03': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 },
+  'angeling xmas_dun01': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000},
 
   // Medium Difficulty
   'atroce ra_fild02': { minMs: 4 * 60 * 60 * 1000, maxMs: 250 * 60 * 1000 },
