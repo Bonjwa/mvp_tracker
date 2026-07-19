@@ -87,7 +87,7 @@ const BOSS_RESPAWN_CONFIG = {
   // High Difficulty
   'baphomet': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Labyrinth Forest 3: 2h
   'dark lord': { minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 60 * 60 * 1000 },   // Glast Heim Churchyard: 1h
-  'Dark Lord gld_dun04': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 60 * 1000},
+  'dark lord gld_dun04': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 60 * 1000},
   'detardeurus': { minMs: 3 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 },   // Abyss Lake 3: 3h
   'deviling yuno_fild03': {minMs: 1 * 60 * 60 * 1000, maxMs: 1 * 90 * 60 * 1000 }, // Develing 1 h
   'deviling pay_fild04': {minMs: 2 * 60 * 60 * 1000, maxMs: 3 * 60 * 60 * 1000 }, // Develing 1 h
