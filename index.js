@@ -74,6 +74,7 @@ const BOSS_RESPAWN_CONFIG = {
   'gopinch': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Dremuchi Forest: 2h
   'ghostring sunkenship': { minMs: 33 * 60 * 1000, maxMs: 53 * 60 * 1000 },
   'ghostring pay_fild04': { minMs: 60 * 60 * 1000, maxMs: 90 * 60 * 1000 },
+  'ghostring prt_maze03': { minMs: 113 * 60 * 1000, maxMs: 170 * 60 * 1000 },
   // Mid-High Difficulty
   'doppelganger': { minMs: 2 * 60 * 60 * 1000, maxMs: 2 * 60 * 60 * 1000 },   // Geffen Dungeon 3: 2h
   'doppelganger gld_dun02': {minMs: 8 * 60 * 60 * 1000, maxMs: 8 * 60 * 60 * 1000 },
@@ -159,6 +160,7 @@ const BOSS_LIST = [
   'Fallen Bishop',
   'Ghostring sunkenship',
   'Ghostring pay_fild04',
+  'Ghostring prt_maze03',
   'Gloom Under Night',
   'Golden Thief Bug',
   'Gopinch',
